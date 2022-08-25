@@ -14,7 +14,7 @@ class VswrAnimation(Scene):
 
         phase_shift = ValueTracker(0)
 
-        sine_wave_forward = axes.plot(lambda t: sine_wave(t))
+        sine_wave_forward = axes.plot(sine_wave)
         sine_wave_forward.add_updater(lambda mob: mob.become(axes.plot(lambda t: 1*np.sin(2*t+phase_shift.get_value()))))
 
         sine_wave_reverse = axes.plot(lambda t: sine_wave(t))

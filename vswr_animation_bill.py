@@ -1,7 +1,7 @@
 from manim import *
 
-ANIMATIONS = 600
-CYCLES = 5
+ANIMATIONS = 20
+CYCLES = .1
 RUN_TIME = 0.1
 
 class VswrAnimation(Scene):
@@ -22,13 +22,13 @@ class VswrAnimation(Scene):
             return sine_wave(t, valueTracker.get_value()) + sine_wave(t, -valueTracker.get_value(), 0.7)
 
         sine_wave_forward = axes.plot(sine_wave)
-        sine_wave_forward.add_updater(lambda mob: mob.become(axes.plot(forward)))
+        sine_wave_forward.add_updater(lambda mob: mob.become(axes.plot(forward, color=BLUE)))
 
         sine_wave_reverse = axes.plot(sine_wave)
-        sine_wave_reverse.add_updater(lambda mob: mob.become(axes.plot(reverse)))
+        sine_wave_reverse.add_updater(lambda mob: mob.become(axes.plot(reverse, color=RED)))
 
         sine_wave_total = axes.plot(sine_wave)
-        sine_wave_total.add_updater(lambda mob: mob.become(axes.plot(total)))
+        sine_wave_total.add_updater(lambda mob: mob.become(axes.plot(total, color=GREEN)))
         
         self.add(axes, sine_wave_forward, sine_wave_reverse, sine_wave_total, valueTracker)
 

@@ -1,7 +1,7 @@
 from manim import *
 
 ANIMATIONS = 20
-CYCLES = .1
+CYCLES = 1
 RUN_TIME = 0.1
 
 class VswrAnimation(Scene):
@@ -32,9 +32,13 @@ class VswrAnimation(Scene):
         
         self.add(axes, sine_wave_forward, sine_wave_reverse, sine_wave_total, valueTracker)
 
+        V_min_point = axes.coords_to_point(2*PI,0.3)
+        V_min_line = axes.get_horizontal_line(V_min_point, line_func=DashedLine, stroke_width=4).set_color(YELLOW_E)
+        
         phase_shifts = np.linspace(0,(2*PI)*CYCLES,ANIMATIONS)
         for phase_shift in phase_shifts:
             self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
+            if phase_shift > PI: self.add(V_min_line)
 
 with tempconfig({"quality": "high_quality", "preview": True}):
     scene = VswrAnimation()

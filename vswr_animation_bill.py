@@ -34,11 +34,14 @@ class VswrAnimation(Scene):
 
         V_min_point = axes.coords_to_point(2*PI,0.3)
         V_min_line = axes.get_horizontal_line(V_min_point, line_func=DashedLine, stroke_width=4).set_color(YELLOW_E)
-        
+
         phase_shifts = np.linspace(0,(2*PI)*CYCLES,ANIMATIONS)
+        size = phase_shifts.size
+        count = 0
         for phase_shift in phase_shifts:
             self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
-            if phase_shift > PI: self.add(V_min_line)
+            if count == size/2: self.add(V_min_line)
+            count = count + 1
 
 with tempconfig({"quality": "high_quality", "preview": True}):
     scene = VswrAnimation()

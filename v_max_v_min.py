@@ -76,8 +76,12 @@ class VmaxVmin(Scene):
             }
         )
 
+        self.play(Write(ax),run_time=2)
+        self.wait(3)
+        self.add(V_min_line)
         self.play(Write(V_min_label))
         self.wait(3)
+        self.add(V_max_line)
         self.play(Write(V_max_label))
         self.wait(3)
         self.play(Write(vswr_V_eq_long))

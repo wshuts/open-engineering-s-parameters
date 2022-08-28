@@ -1,7 +1,7 @@
 from manim import *
 
-ANIMATIONS = 20
-CYCLES = 1
+ANIMATIONS = 600
+CYCLES = 5
 RUN_TIME = 0.1
 
 class VswrAnimation(Scene):
@@ -30,19 +30,18 @@ class VswrAnimation(Scene):
         sine_wave_total = axes.plot(sine_wave)
         sine_wave_total.add_updater(lambda mob: mob.become(axes.plot(total, color=GREEN)))
         
-        self.add(axes, sine_wave_forward, sine_wave_reverse, sine_wave_total, valueTracker)
-
         V_min_point = axes.coords_to_point(2*PI,0.3)
         V_min_line = axes.get_horizontal_line(V_min_point, line_func=DashedLine, stroke_width=4).set_color(YELLOW_E)
 
         phase_shifts = np.linspace(0,(2*PI)*CYCLES,ANIMATIONS)
-        size = phase_shifts.size
-        count = 0
         for phase_shift in phase_shifts:
             self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
-            if count == size/2: self.add(V_min_line)
-            count = count + 1
+            if phase_shift>0: self.add(axes)
+            if phase_shift>PI/2: self.add(sine_wave_forward)
+            if phase_shift>PI: self.add(sine_wave_reverse)
+            if phase_shift>3*PI/2: self.add(sine_wave_total)
+            if phase_shift>2*PI: self.add(V_min_line)
 
-with tempconfig({"quality": "high_quality", "preview": True}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": True}):
     scene = VswrAnimation()
     scene.render()

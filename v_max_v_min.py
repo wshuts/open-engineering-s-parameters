@@ -17,26 +17,65 @@ class VmaxVmin(Scene):
         V_max_line = ax.get_horizontal_line(point_v_max, line_func=DashedLine, stroke_width=4).set_color(YELLOW_E)
         V_min_line = ax.get_horizontal_line(point_v_min, line_func=DashedLine, stroke_width=4).set_color(YELLOW_E)
 
-        V_max_label = MathTex(r'|',r'V_\mathrm{max}',r'|').next_to(V_max_line, direction=UP).shift(RIGHT*5.26+DOWN*0.12).scale(1).set_color(WHITE).shift(LEFT*0.2)
-        V_max_label.set_color_by_tex_to_color_map({
-        r'V_\mathrm{max}': YELLOW_D,
-        }) 
-        V_min_label = MathTex(r'|',r'V_\mathrm{min}',r'|').next_to(V_min_line, direction=UP).shift(RIGHT*5.26+DOWN*0.12).scale(1).set_color(WHITE).shift(LEFT*0.2)
-        V_min_label.set_color_by_tex_to_color_map({
-        r'V_\mathrm{min}': YELLOW_D,
-        }) 
-        vswr_V_eq_long = MathTex(r'\mathrm{Voltage \ Standing \ Wave \ Ratio}',r'=',r'{{|',r'V_\mathrm{max}',r'|}','\over',r'{|',r'V_\mathrm{min}',r'|}}').scale(1).shift(LEFT*0+DOWN*3.12).set_color(WHITE)
-        vswr_V_eq_long.set_color_by_tex_to_color_map({
-        r'V_\mathrm{max}': YELLOW_D,
-        r'V_\mathrm{min}': YELLOW_D,
-        r'\mathrm{Voltage \ Standing \ Wave \ Ratio}': TEAL,
-        }) 
-        vswr_V_eq = MathTex(r'\mathrm{VSWR}',r'=',r'{{|',r'V_\mathrm{max}',r'|}','\over',r'{|',r'V_\mathrm{min}',r'|}}').scale(1).shift(LEFT*0+DOWN*3.12).set_color(WHITE)
-        vswr_V_eq.set_color_by_tex_to_color_map({
-        r'V_\mathrm{max}': YELLOW_D,
-        r'V_\mathrm{min}': YELLOW_D,
-        r'VSWR': TEAL,
-        }) 
+        V_max_label = (
+            MathTex(r'|',r'V_\mathrm{max}',r'|')
+            .next_to(V_max_line, direction=UP)
+            .shift(RIGHT*5.06+DOWN*0.12)
+            .scale(1)
+            .set_color(WHITE)
+        )
+        V_max_label.set_color_by_tex_to_color_map(
+            {
+                r'V_\mathrm{max}': YELLOW_D
+            }
+        )
+
+        V_min_label = (
+            MathTex(r'|',r'V_\mathrm{min}',r'|')
+            .next_to(V_min_line, direction=UP)
+            .shift(RIGHT*5.06+DOWN*0.12)
+            .scale(1)
+            .set_color(WHITE)
+        )
+        V_min_label.set_color_by_tex_to_color_map(
+            {
+                r'V_\mathrm{min}': YELLOW_D
+            }
+        )
+
+        vswr_V_eq_long = (
+            MathTex(
+                r'\mathrm{Voltage \ Standing \ Wave \ Ratio}', r'=',
+                r'{{|', r'V_\mathrm{max}', r'|}',
+                '\over',
+                r'{|', r'V_\mathrm{min}', r'|}}'
+            )
+            .scale(1)
+            .shift(LEFT*0+DOWN*3.12)
+            .set_color(WHITE)
+        )
+        vswr_V_eq_long.set_color_by_tex_to_color_map(
+            {
+                r'V_\mathrm{max}': YELLOW_D,
+                r'V_\mathrm{min}': YELLOW_D,
+                r'\mathrm{Voltage \ Standing \ Wave \ Ratio}': TEAL
+            }
+        )
+
+        vswr_V_eq = (
+            MathTex(r'\mathrm{VSWR}',r'=',r'{{|',r'V_\mathrm{max}',r'|}','\over',r'{|',r'V_\mathrm{min}',r'|}}')
+            .scale(1)
+            .shift(LEFT*0+DOWN*3.12)
+            .set_color(WHITE)
+        )
+        vswr_V_eq.set_color_by_tex_to_color_map(
+            {
+                r'V_\mathrm{max}': YELLOW_D,
+                r'V_\mathrm{min}': YELLOW_D,
+                r'VSWR': TEAL
+            }
+        )
+
         self.play(Write(V_min_label))
         self.wait(3)
         self.play(Write(V_max_label))

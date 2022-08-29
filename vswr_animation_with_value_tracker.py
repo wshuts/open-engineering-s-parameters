@@ -109,13 +109,32 @@ class VswrAnimation(Scene):
         phase_shifts = [n*PHASE_STEP for n in range(0,POINTS_PER_CYCLE*CYCLES+1)]
         for phase_shift in phase_shifts:
             self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
-        #self.play(Write(V_min_label))
-        #self.wait(3)
-        #self.play(Write(V_max_label))
-        #self.wait(3)
-        #self.play(Write(vswr_V_eq_long))
-        #self.wait(3)
-        #self.play(ReplacementTransform(vswr_V_eq_long, vswr_V_eq))
+
+        animation_group_1 = AnimationGroup(
+            Animation(Mobject(), run_time=1),
+            Write(V_min_label),
+            lag_ratio=1
+        )
+
+        animation_group_2 = AnimationGroup(
+            Animation(Mobject(), run_time=2),
+            Write(V_max_label),
+            lag_ratio=1
+        )
+
+        animation_group_3 = AnimationGroup(
+            Animation(Mobject(), run_time=3),
+            Write(vswr_V_eq_long),
+            lag_ratio=1
+        )
+
+        animation_group_4 = AnimationGroup(
+            Animation(Mobject(), run_time=4),
+            ReplacementTransform(vswr_V_eq_long, vswr_V_eq),
+            lag_ratio=1
+        )
+
+        self.play(animation_group_1, animation_group_2, animation_group_3, animation_group_4)
 
 with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": True}):
     scene = VswrAnimation()

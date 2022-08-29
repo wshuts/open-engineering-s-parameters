@@ -106,9 +106,9 @@ class VswrAnimation(Scene):
 
         self.add_updater(scene_updater)
 
-        phase_shifts = [n*PHASE_STEP for n in range(0,POINTS_PER_CYCLE*CYCLES+1)]
-        for phase_shift in phase_shifts:
-            self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
+        # phase_shifts = [n*PHASE_STEP for n in range(0,POINTS_PER_CYCLE*CYCLES+1)]
+        # for phase_shift in phase_shifts:
+        #     self.play(valueTracker.animate.set_value(phase_shift), run_time=RUN_TIME)
 
         animation_group_1 = AnimationGroup(
             Animation(Mobject(), run_time=1),
@@ -130,7 +130,7 @@ class VswrAnimation(Scene):
 
         animation_group_4 = AnimationGroup(
             Animation(Mobject(), run_time=4),
-            ReplacementTransform(vswr_V_eq_long, vswr_V_eq),
+            FadeIn(vswr_V_eq),
             lag_ratio=1
         )
 

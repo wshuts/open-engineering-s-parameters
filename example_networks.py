@@ -43,7 +43,7 @@ class ExampleNetworks(MovingCameraScene):
 
         # Title underline
         underline_properties = Line(LEFT, RIGHT, color=YELLOW)
-        underline_properties.set_width(1.1*title_properties.get_width())
+        underline_properties.width=1.1*title_properties.width
         underline_properties.next_to(title_properties, DOWN)
         underline_properties.shift(UP * 0.1)
 
@@ -84,167 +84,167 @@ class ExampleNetworks(MovingCameraScene):
             run_time=4, lag_ratio=0.2
         )
 
-        # ### Antennas
-        # ant_symbol = ImageMobject('/Users/Coto/Documents/edu/antenna.png').shift(DOWN*12.5+LEFT*10.5).scale(0.7)
+        ### Antennas
+        ant_symbol = ImageMobject("antenna.png").shift(DOWN*12.5+LEFT*10.5).scale(0.7)
 
-        # # Port 1 ANT
-        # port1_num_ant=MathTex("1").set_color(YELLOW)
-        # port1_num_ant.shift(DOWN * 13.7)
-        # port1_num_ant.shift(LEFT * 9.8)
-        # port1_num_ant.scale(1.8)
+        # Port 1 ANT
+        port1_num_ant=MathTex("1").set_color(YELLOW)
+        port1_num_ant.shift(DOWN * 13.7)
+        port1_num_ant.shift(LEFT * 9.8)
+        port1_num_ant.scale(1.8)
 
-        # self.play(FadeIn(ant_symbol, shift=UP))
-        # self.play(Write(port1_num_ant))
+        self.play(FadeIn(ant_symbol, shift=UP))
+        self.play(Write(port1_num_ant))
 
-        # # Right arrow
-        # long_right_arrow_wave=Tex('$\Longrightarrow$').scale(5).next_to(ant_symbol).shift(RIGHT*3).set_color(WHITE)
+        # Right arrow
+        long_right_arrow_wave=Tex('$\Longrightarrow$').scale(5).next_to(ant_symbol).shift(RIGHT*3).set_color(WHITE)
 
-        # self.play(
-        #     FadeIn(long_right_arrow_wave, shift=RIGHT)
-        # )
+        self.play(
+            FadeIn(long_right_arrow_wave, shift=RIGHT)
+        )
 
-        # # n^2 = 1
-        # nsquared=MathTex("n^2", #0
-        # "=", #1
-        # "1", #2
-        # ).next_to(long_right_arrow_wave).scale(1.6).shift(LEFT*3.25+UP*0.9)
+        # n^2 = 1
+        nsquared=MathTex("n^2", #0
+        "=", #1
+        "1", #2
+        ).next_to(long_right_arrow_wave).scale(1.6).shift(LEFT*3.25+UP*0.9)
 
-        # nsquared[0].set_color(YELLOW)
-        # nsquared[1].set_color(WHITE)
-        # nsquared[2].set_color(YELLOW)
-        # self.play(Write(nsquared))
+        nsquared[0].set_color(YELLOW)
+        nsquared[1].set_color(WHITE)
+        nsquared[2].set_color(YELLOW)
+        self.play(Write(nsquared))
 
-        # # 1-port matrix
-        # matrix_1=MathTex("\mathrm{S}", #0
-        # "=", #1
-        # r"\big(", #2
-        # "\mathrm{S}_{11}", #3
-        # r"\big)" #4
-        # ).next_to(long_right_arrow_wave).scale(2.2).shift(RIGHT*4+UP*0)
+        # 1-port matrix
+        matrix_1=MathTex("\mathrm{S}", #0
+        "=", #1
+        r"\big(", #2
+        "\mathrm{S}_{11}", #3
+        r"\big)" #4
+        ).next_to(long_right_arrow_wave).scale(2.2).shift(RIGHT*4+UP*0)
 
-        # matrix_1[0].set_color(YELLOW)
-        # matrix_1[1].set_color(WHITE)
-        # matrix_1[2].set_color(WHITE)
-        # matrix_1[3].set_color(BLUE)
-        # matrix_1[4].set_color(WHITE)
-        # self.play(Write(matrix_1))
-        # self.wait(3)
+        matrix_1[0].set_color(YELLOW)
+        matrix_1[1].set_color(WHITE)
+        matrix_1[2].set_color(WHITE)
+        matrix_1[3].set_color(BLUE)
+        matrix_1[4].set_color(WHITE)
+        self.play(Write(matrix_1))
+        self.wait(3)
 
-        # # s11 magnitude
-        # s11_mag=MathTex("|", #0
-        # "\mathrm{S}_{11}", #1
-        # "(", #2
-        # "f", #3
-        # ")", #4
-        # "|" #5
-        # ).next_to(long_right_arrow_wave).scale(2.2).shift(RIGHT*4+UP*0)
+        # s11 magnitude
+        s11_mag=MathTex("|", #0
+        "\mathrm{S}_{11}", #1
+        "(", #2
+        "f", #3
+        ")", #4
+        "|" #5
+        ).next_to(long_right_arrow_wave).scale(2.2).shift(RIGHT*4+UP*0)
 
-        # s11_mag[0].set_color(WHITE)
-        # s11_mag[1].set_color(BLUE)
-        # s11_mag[2].set_color(WHITE)
-        # s11_mag[3].set_color(MAROON)
-        # s11_mag[4].set_color(WHITE)
-        # s11_mag[5].set_color(WHITE)
-        # self.play(ReplacementTransform(matrix_1, s11_mag))
+        s11_mag[0].set_color(WHITE)
+        s11_mag[1].set_color(BLUE)
+        s11_mag[2].set_color(WHITE)
+        s11_mag[3].set_color(MAROON)
+        s11_mag[4].set_color(WHITE)
+        s11_mag[5].set_color(WHITE)
+        self.play(ReplacementTransform(matrix_1, s11_mag))
 
 
-        # self.play(Write(curve1), run_time=3)
+        self.play(Write(curve1), run_time=3)
         
-        # self.wait(3)
-        # self.play(Write(line1), run_time=1)
+        self.wait(3)
+        self.play(Write(line1), run_time=1)
 
 
         
-        # # Delete plot antenna curve
-        # self.wait(3)
+        # Delete plot antenna curve
+        self.wait(3)
 
-        # ### Dummy Loads
-        # self.play(
-        # FadeOut(ant_symbol, shift=DOWN),
-        # FadeOut(port1_num_ant, shift=DOWN),
-        # Uncreate(line1), Uncreate(curve1), run_time=3, lag_ratio=0.2)
-        # self.play(
-        #     x.submobjects[0].animate.set_opacity(0.5),
-        #     x.submobjects[1].animate.set_opacity(1)
-        # )
+        ### Dummy Loads
+        self.play(
+        FadeOut(ant_symbol, shift=DOWN),
+        FadeOut(port1_num_ant, shift=DOWN),
+        Uncreate(line1), Uncreate(curve1), run_time=3, lag_ratio=0.2)
+        self.play(
+            x.submobjects[0].animate.set_opacity(0.5),
+            x.submobjects[1].animate.set_opacity(1)
+        )
 
-        # # Display circuit
-        # circuit_dummy = ImageMobject("/Users/Coto/Documents/edu/dummy_load.png").scale(0.65).shift(LEFT*10.5+DOWN*12.6)
+        # Display circuit
+        circuit_dummy = ImageMobject("dummy_load.png").scale(0.65).shift(LEFT*10.5+DOWN*12.6)
 
-        # self.play(FadeIn(circuit_dummy, shift=RIGHT), run_time=1)
+        self.play(FadeIn(circuit_dummy, shift=RIGHT), run_time=1)
 
-        # # Show source framebox
-        # framebox_source = DashedVMobject(Rectangle(height=4.4, width=3.5).set_color(YELLOW).next_to(circuit_dummy).shift(LEFT*6.7), num_dashes=30, positive_space_ratio=0.6)
-        # self.play(Write(framebox_source), run_time=1.5)
-        # # Source label
-        # label_source = Text("Source").set_color(YELLOW).scale(0.9).shift(DOWN*0.2)
-        # label_source.next_to(framebox_source, direction=UP)
-        # self.play(Write(label_source))
-        # self.wait(3)
+        # Show source framebox
+        framebox_source = DashedVMobject(Rectangle(height=4.4, width=3.5).set_color(YELLOW).next_to(circuit_dummy).shift(LEFT*6.7), num_dashes=30, dashed_ratio=0.6)
+        self.play(Write(framebox_source), run_time=1.5)
+        # Source label
+        label_source = Text("Source").set_color(YELLOW).scale(0.9).shift(DOWN*0.2)
+        label_source.next_to(framebox_source, direction=UP)
+        self.play(Write(label_source))
+        self.wait(3)
 
-        # # Show load framebox
-        # framebox_load = DashedVMobject(Rectangle(height=4.4, width=2.7).set_color(YELLOW).next_to(circuit_dummy).shift(LEFT*2.7), num_dashes=27, positive_space_ratio=0.6)
-        # # Load label
-        # label_load = Text("Load").set_color(YELLOW).scale(0.9).shift(DOWN*0.2)
-        # label_load.next_to(framebox_load, direction=UP)
-        # self.play(ReplacementTransform(framebox_source, framebox_load),
-        # ReplacementTransform(label_source, label_load),
-        # run_time=1.5)
-        # self.wait(3)
+        # Show load framebox
+        framebox_load = DashedVMobject(Rectangle(height=4.4, width=2.7).set_color(YELLOW).next_to(circuit_dummy).shift(LEFT*2.7), num_dashes=27, dashed_ratio=0.6)
+        # Load label
+        label_load = Text("Load").set_color(YELLOW).scale(0.9).shift(DOWN*0.2)
+        label_load.next_to(framebox_load, direction=UP)
+        self.play(ReplacementTransform(framebox_source, framebox_load),
+        ReplacementTransform(label_source, label_load),
+        run_time=1.5)
+        self.wait(3)
 
-        # # Hide framebox & label
-        # self.play(Uncreate(framebox_load), Unwrite(label_load))
-        # self.wait(3)
+        # Hide framebox & label
+        self.play(Uncreate(framebox_load), Unwrite(label_load))
+        self.wait(3)
 
-        # # R_source label
-        # R_source=MathTex("R_{S}").next_to(label_source).scale(1.3).shift(DOWN*0.35+LEFT*4.24)
-        # R_source[0].set_color(WHITE)
+        # R_source label
+        R_source=MathTex("R_{S}").next_to(label_source).scale(1.3).shift(DOWN*0.35+LEFT*4.24)
+        R_source[0].set_color(WHITE)
 
-        # # R_load label
-        # R_load=MathTex("R_{L}").next_to(label_load).scale(1.3).shift(DOWN*2.05+RIGHT*0.35)
-        # R_load[0].set_color(WHITE)
+        # R_load label
+        R_load=MathTex("R_{L}").next_to(label_load).scale(1.3).shift(DOWN*2.05+RIGHT*0.35)
+        R_load[0].set_color(WHITE)
 
-        # self.play(Write(R_source))
-        # self.wait(3)
-        # self.play(Write(R_load))
-        # self.wait(3)
+        self.play(Write(R_source))
+        self.wait(3)
+        self.play(Write(R_load))
+        self.wait(3)
 
-        # # R_source 50ohm label
-        # R_source_50=MathTex("50 \ \Omega").next_to(label_source).scale(1.3).shift(DOWN*0.35+LEFT*4.4)
-        # R_source_50[0].set_color(WHITE)
+        # R_source 50ohm label
+        R_source_50=MathTex("50 \ \Omega").next_to(label_source).scale(1.3).shift(DOWN*0.35+LEFT*4.4)
+        R_source_50[0].set_color(WHITE)
 
-        # # R_load 50ohm label
-        # R_load_50=MathTex("50 \ \Omega").next_to(label_load).scale(1.3).shift(DOWN*2.05+RIGHT*0.45)
-        # R_load_50[0].set_color(WHITE)
+        # R_load 50ohm label
+        R_load_50=MathTex("50 \ \Omega").next_to(label_load).scale(1.3).shift(DOWN*2.05+RIGHT*0.45)
+        R_load_50[0].set_color(WHITE)
 
-        # self.play(ReplacementTransform(R_source, R_source_50), ReplacementTransform(R_load, R_load_50))
+        self.play(ReplacementTransform(R_source, R_source_50), ReplacementTransform(R_load, R_load_50))
 
-        # # Display dummy load curve
-        # curve_load = ax.get_graph(lambda x: -30, x_range=[0, 5], color=BLUE)
+        # Display dummy load curve
+        curve_load = ax.plot(lambda x: -30, x_range=[0, 5], color=BLUE)
 
-        # line1 = ax.get_vertical_line(
-        #     ax.i2gp(2, curve1), line_func=DashedLine, stroke_width=8, color=YELLOW_E
-        # )
+        line1 = ax.get_vertical_line(
+            ax.i2gp(2, curve1), line_func=DashedLine, stroke_width=8, color=YELLOW_E
+        )
 
-        # self.play(Write(curve_load), run_time=3)
-        # self.wait(3)
-        # #self.play(Uncreate(curve_load), run_time=3)
-        # self.wait(3)
+        self.play(Write(curve_load), run_time=3)
+        self.wait(3)
+        #self.play(Uncreate(curve_load), run_time=3)
+        self.wait(3)
 
-        # # Hide dummy load section
-        # self.play(
-        # FadeOut(circuit_dummy, shift=DOWN),
-        # FadeOut(R_source_50, shift=DOWN),
-        # FadeOut(R_load_50, shift=DOWN),
-        # Uncreate(curve_load),
-        # FadeOut(long_right_arrow_wave, shift=RIGHT),
-        # Unwrite(s11_mag),
-        # Unwrite(nsquared), run_time=2)
-        # self.wait(3)
-        # self.play(
-        #     x.submobjects[1].animate.set_opacity(0.5),
-        #     x.submobjects[2].animate.set_opacity(1)
-        # )
+        # Hide dummy load section
+        self.play(
+        FadeOut(circuit_dummy, shift=DOWN),
+        FadeOut(R_source_50, shift=DOWN),
+        FadeOut(R_load_50, shift=DOWN),
+        Uncreate(curve_load),
+        FadeOut(long_right_arrow_wave, shift=RIGHT),
+        Unwrite(s11_mag),
+        Unwrite(nsquared), run_time=2)
+        self.wait(3)
+        self.play(
+            x.submobjects[1].animate.set_opacity(0.5),
+            x.submobjects[2].animate.set_opacity(1)
+        )
 
 
 

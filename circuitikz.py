@@ -8,6 +8,10 @@ class Circuitikz(MovingCameraScene):
         circuitString="""\\begin{circuitikz}[american]
                 \draw (0, 4) node [anchor = south east] {$a$}
                     to [V, *-*, l_=$V_S$] ++(0, -4) node [anchor = north east] {$b$};
+                \draw (0, 4)
+                    to [short] ++(4, 0)
+                    to [R, l=$R_1$, v=$V_1$] ++(0, -4)
+                    to [I, l=$I_S$] ++(-4, 0);
             \end{circuitikz}"""
 
         circuit=Tex(circuitString, tex_template=texTemplate, stroke_width=2, fill_opacity=0)

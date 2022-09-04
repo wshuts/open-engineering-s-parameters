@@ -15,7 +15,6 @@ class Circuitikz(MovingCameraScene):
                 \draw [very thick, ->] (4.5, 3.5)
                     to  ++(0, 1) node [anchor = south west] {$I$}
                     to  ++(-1, 0);
-                \node at (6, 6) {$X$ (some node)};
             \end{circuitikz}"""
 
         circuit=Tex(circuitString, tex_template=texTemplate, stroke_width=2, fill_opacity=0)

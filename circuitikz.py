@@ -5,7 +5,7 @@ class Circuitikz(MovingCameraScene):
         texTemplate = TexTemplate()
         texTemplate.add_to_preamble(r"\usepackage{circuitikz}")
 
-        circuitString="""\\begin{circuitikz}[american]
+        circuitString="""\\begin{circuitikz}[american, scale=0.8, transform shape]
                 \draw (0, 4) node [anchor = south east] {$a$}
                     to [V, *-*, l_=$V_S$] ++(0, -4) node [anchor = north east] {$b$};
                 \draw (0, 4)

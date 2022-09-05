@@ -485,126 +485,126 @@ class ExampleNetworks(MovingCameraScene):
 
 
 
-        # ### Attenuator
+        ### Attenuator
 
-        # self.play(
-        #     x.submobjects[2].animate.set_opacity(0.5),
-        #     x.submobjects[3].animate.set_opacity(1)
-        # )
+        self.play(
+            x.submobjects[2].animate.set_opacity(0.5),
+            x.submobjects[3].animate.set_opacity(1)
+        )
 
-        # # Display attenuator circuit
-        # circuit_attenuator = ImageMobject("/Users/Coto/Documents/edu/attenuator.png").scale(0.65).shift(LEFT*9.7+DOWN*12.6)
+        # Display attenuator circuit
+        circuit_attenuator = ImageMobject("attenuator.png").scale(0.65).shift(LEFT*9.7+DOWN*12.6)
 
-        # self.play(
-        #     FadeOut(L_1),
-        #     FadeOut(C_1),
-        #     ReplacementTransform(circuit_lowpass, circuit_attenuator)
-        # )
+        self.play(
+            FadeOut(L_1),
+            FadeOut(C_1),
+            ReplacementTransform(circuit_lowpass, circuit_attenuator)
+        )
 
-        # # Show attenuator framebox
-        # framebox_attenuator = DashedVMobject(Rectangle(height=4.4, width=3.8).set_color(YELLOW).next_to(circuit_lowpass).shift(LEFT*6.4), num_dashes=30, positive_space_ratio=0.6)
-        # self.play(Write(framebox_attenuator), run_time=1.5)
+        # Show attenuator framebox
+        framebox_attenuator = DashedVMobject(Rectangle(height=4.4, width=3.8).set_color(YELLOW).next_to(circuit_lowpass).shift(LEFT*6.4), num_dashes=30, positive_space_ratio=0.6)
+        self.play(Write(framebox_attenuator), run_time=1.5)
 
-        # # Pi-pad attenuator label
-        # label_attenuator = Tex(r"$\Pi$-Pad Attenuator").set_color(YELLOW).scale(1).shift(DOWN*0.2)
-        # label_attenuator.next_to(framebox_attenuator, direction=UP)
-        # self.play(Write(label_attenuator))
-        # self.wait(3)
+        # Pi-pad attenuator label
+        label_attenuator = Tex(r"$\Pi$-Pad Attenuator").set_color(YELLOW).scale(1).shift(DOWN*0.2)
+        label_attenuator.next_to(framebox_attenuator, direction=UP)
+        self.play(Write(label_attenuator))
+        self.wait(3)
 
-        # # Hide framebox & label
-        # self.play(Unwrite(framebox_attenuator), Unwrite(label_attenuator))
-        # self.wait(3)
+        # Hide framebox & label
+        self.play(Unwrite(framebox_attenuator), Unwrite(label_attenuator))
+        self.wait(3)
 
-        # # R_1 label
-        # R_1=MathTex("R_{1}").next_to(R_load_50).scale(1.3).shift(LEFT*6.6)
-        # R_1[0].set_color(WHITE)
-        # self.play(Write(R_1))
+        # R_1 label
+        R_1=MathTex("R_{1}").next_to(R_load_50).scale(1.3).shift(LEFT*6.6)
+        R_1[0].set_color(WHITE)
+        self.play(Write(R_1))
 
-        # # R_2 label
-        # R_2=MathTex("R_{2}").next_to(R_load_50).scale(1.3).shift(LEFT*6).shift(UP*1.8)
-        # R_2[0].set_color(WHITE)
-        # self.play(Write(R_2))
+        # R_2 label
+        R_2=MathTex("R_{2}").next_to(R_load_50).scale(1.3).shift(LEFT*6).shift(UP*1.8)
+        R_2[0].set_color(WHITE)
+        self.play(Write(R_2))
 
-        # # R_3 label
-        # R_3=MathTex("R_{3}").next_to(R_load_50).scale(1.3).shift(LEFT*3.92)
-        # R_3[0].set_color(WHITE)
-        # self.play(Write(R_3))
+        # R_3 label
+        R_3=MathTex("R_{3}").next_to(R_load_50).scale(1.3).shift(LEFT*3.92)
+        R_3[0].set_color(WHITE)
+        self.play(Write(R_3))
 
-        # # Framebox S21
+        # Framebox S21
 
-        # framebox_s21 = SurroundingRectangle(m2_2port[0][2], buff = .2)
-        # self.play(Create(framebox_s21))
-        # self.wait(3)
+        framebox_s21 = SurroundingRectangle(m2_2port[0][2], buff = .2)
+        self.play(Create(framebox_s21))
+        self.wait(3)
 
-        # # Display S21 curve
-        # attenuator_s21 = ax.plot(lambda x: - (-0.3)/( 0.4 ** (  (0.5*x - ((x)**(x-(9*(x**2)))))   )  ) - 1.8*x - 14.675 - 0.445, x_range=[0, 5], color=RED)
-        # line1 = ax.get_vertical_line(
-        #     ax.i2gp(4, attenuator_s21), line_func=DashedLine, stroke_width=8, color=ORANGE
-        # )
-        # cutoff_label=MathTex("-20 \mathrm{ \ dB}").next_to(R_source_50).scale(1.1).shift(RIGHT*16.9+UP*2.6)
+        # Display S21 curve
+        attenuator_s21 = ax.plot(lambda x: - (-0.3)/( 0.4 ** (  (0.5*x - ((x)**(x-(9*(x**2)))))   )  ) - 1.8*x - 14.675 - 0.445, x_range=[0, 5], color=RED)
+        line1 = ax.get_vertical_line(
+            ax.i2gp(4, attenuator_s21), line_func=DashedLine, stroke_width=8, color=ORANGE
+        )
+        cutoff_label=MathTex("-20 \mathrm{ \ dB}").next_to(R_source_50).scale(1.1).shift(RIGHT*16.9+UP*2.6)
         
-        # self.play(
-        #     AnimationGroup(
-        #         #Write(attenuator_s21_flat),
-        #         Write(attenuator_s21),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        self.play(
+            AnimationGroup(
+                #Write(attenuator_s21_flat),
+                Write(attenuator_s21),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.play(Write(line1),Write(cutoff_label))
+        self.play(Write(line1),Write(cutoff_label))
 
-        # attenuator_s12 = ax.plot(lambda x: - (-0.3)/( 0.4 ** (  (0.5*x - ((x)**(x-(9*(x**2)))))   )  ) - 1.8*x - 14.675 - 0.445, x_range=[0, 5], color=GREEN)
+        attenuator_s12 = ax.plot(lambda x: - (-0.3)/( 0.4 ** (  (0.5*x - ((x)**(x-(9*(x**2)))))   )  ) - 1.8*x - 14.675 - 0.445, x_range=[0, 5], color=GREEN)
 
-        # framebox_s12 = SurroundingRectangle(m2_2port[0][1], buff = .2)
+        framebox_s12 = SurroundingRectangle(m2_2port[0][1], buff = .2)
 
-        # self.play(
-        #     AnimationGroup(
-        #         ReplacementTransform(framebox_s21, framebox_s12),
-        #         #Write(attenuator_s21_flat),
-        #         Write(attenuator_s12),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(framebox_s21, framebox_s12),
+                #Write(attenuator_s21_flat),
+                Write(attenuator_s12),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.wait(3)
-        # self.play(
-        #     Uncreate(line1),
-        #     FadeOut(cutoff_label)
-        # )
+        self.wait(3)
+        self.play(
+            Uncreate(line1),
+            FadeOut(cutoff_label)
+        )
 
-        # attenuator_s11 = ax.plot(lambda x: (0.2*(np.log(x+0.06)/np.log(1.1))) - 23, x_range=[0, 5], color=BLUE)
-        # # \left(0.2\log_{1.1}\left(x+0.06\right)\right)-23
+        attenuator_s11 = ax.plot(lambda x: (0.2*(np.log(x+0.06)/np.log(1.1))) - 23, x_range=[0, 5], color=BLUE)
+        # \left(0.2\log_{1.1}\left(x+0.06\right)\right)-23
         
-        # framebox_s11 = SurroundingRectangle(m2_2port[0][0], buff = .2)
+        framebox_s11 = SurroundingRectangle(m2_2port[0][0], buff = .2)
 
-        # self.play(
-        #     AnimationGroup(
-        #         ReplacementTransform(framebox_s12, framebox_s11),
-        #         #Write(attenuator_s21_flat),
-        #         Write(attenuator_s11),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(framebox_s12, framebox_s11),
+                #Write(attenuator_s21_flat),
+                Write(attenuator_s11),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.wait(3)
+        self.wait(3)
 
-        # attenuator_s22 = ax.plot(lambda x: (0.2*(np.log(x+0.06)/np.log(1.1))) - 23, x_range=[0, 5], color=PURPLE)
+        attenuator_s22 = ax.plot(lambda x: (0.2*(np.log(x+0.06)/np.log(1.1))) - 23, x_range=[0, 5], color=PURPLE)
         
-        # framebox_s22 = SurroundingRectangle(m2_2port[0][3], buff = .2)
+        framebox_s22 = SurroundingRectangle(m2_2port[0][3], buff = .2)
 
-        # self.play(
-        #     AnimationGroup(
-        #         ReplacementTransform(framebox_s11, framebox_s22),
-        #         Write(attenuator_s22),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(framebox_s11, framebox_s22),
+                Write(attenuator_s22),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.wait(3)
+        self.wait(3)
 
 
 

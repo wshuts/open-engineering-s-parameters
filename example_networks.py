@@ -493,7 +493,7 @@ class ExampleNetworks(MovingCameraScene):
         )
 
         # Display attenuator circuit
-        circuit_attenuator = ImageMobject("attenuator.png").scale(0.65).shift(LEFT*9.7+DOWN*12.6)
+        circuit_attenuator = ImageMobject("attenuator.png").scale(1).shift(LEFT*9.7+DOWN*12.6)
 
         self.play(
             FadeOut(L_1),
@@ -502,7 +502,7 @@ class ExampleNetworks(MovingCameraScene):
         )
 
         # Show attenuator framebox
-        framebox_attenuator = DashedVMobject(Rectangle(height=4.4, width=3.8).set_color(YELLOW).next_to(circuit_lowpass).shift(LEFT*6.4), num_dashes=30, positive_space_ratio=0.6)
+        framebox_attenuator = DashedVMobject(Rectangle(height=4.4, width=3.8).set_color(YELLOW).next_to(circuit_lowpass).shift(LEFT*8.4), num_dashes=30, dashed_ratio=0.6)
         self.play(Write(framebox_attenuator), run_time=1.5)
 
         # Pi-pad attenuator label
@@ -516,17 +516,17 @@ class ExampleNetworks(MovingCameraScene):
         self.wait(3)
 
         # R_1 label
-        R_1=MathTex("R_{1}").next_to(R_load_50).scale(1.3).shift(LEFT*6.6)
+        R_1=MathTex("R_{1}").next_to(R_load_50).scale(1.3).shift(LEFT*6.6 + DOWN*0.1)
         R_1[0].set_color(WHITE)
         self.play(Write(R_1))
 
         # R_2 label
-        R_2=MathTex("R_{2}").next_to(R_load_50).scale(1.3).shift(LEFT*6).shift(UP*1.8)
+        R_2=MathTex("R_{2}").next_to(R_load_50).scale(1.3).shift(LEFT*5.8 + UP*1.9)
         R_2[0].set_color(WHITE)
         self.play(Write(R_2))
 
         # R_3 label
-        R_3=MathTex("R_{3}").next_to(R_load_50).scale(1.3).shift(LEFT*3.92)
+        R_3=MathTex("R_{3}").next_to(R_load_50).scale(1.3).shift(LEFT*3.8 + DOWN*0.1)
         R_3[0].set_color(WHITE)
         self.play(Write(R_3))
 

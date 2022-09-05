@@ -687,7 +687,7 @@ class ExampleNetworks(MovingCameraScene):
         m2_3port = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}", r"\mathrm{S}_{13}"],
                            [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}", r"\mathrm{S}_{23}"],
                            [r"\mathrm{S}_{31}", r"\mathrm{S}_{32}", r"\mathrm{S}_{33}"]], left_bracket="(", right_bracket=")", element_alignment_corner=DR-DR)
-        m1_2port.shift(LEFT*2)
+        m1_3port.shift(LEFT*2)
         eq_3port.next_to(m1_3port)
         m2_3port.next_to(eq_3port)
         m2_3port[0][0].set_color(BLUE)

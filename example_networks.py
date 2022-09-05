@@ -307,178 +307,178 @@ class ExampleNetworks(MovingCameraScene):
 
         self.wait(3)
 
-        # # Right arrow
-        # long_right_arrow_wave=Tex('$\Longrightarrow$').scale(5).next_to(ant_symbol).shift(RIGHT*5.9).set_color(WHITE)
+        # Right arrow
+        long_right_arrow_wave=Tex('$\Longrightarrow$').scale(5).next_to(ant_symbol).shift(RIGHT*5.9).set_color(WHITE)
 
-        # self.play(
-        #     FadeIn(long_right_arrow_wave, shift=RIGHT)
-        # )
+        self.play(
+            FadeIn(long_right_arrow_wave, shift=RIGHT)
+        )
 
-        # # n^2 = 4
-        # nsquared=MathTex("n^2", #0
-        # "=", #1
-        # "4", #2
-        # ).next_to(long_right_arrow_wave).scale(1.6).shift(LEFT*3.25+UP*0.9)
+        # n^2 = 4
+        nsquared=MathTex("n^2", #0
+        "=", #1
+        "4", #2
+        ).next_to(long_right_arrow_wave).scale(1.6).shift(LEFT*3.25+UP*0.9)
 
-        # nsquared[0].set_color(YELLOW)
-        # nsquared[1].set_color(WHITE)
-        # nsquared[2].set_color(YELLOW)
-        # self.play(Write(nsquared))
+        nsquared[0].set_color(YELLOW)
+        nsquared[1].set_color(WHITE)
+        nsquared[2].set_color(YELLOW)
+        self.play(Write(nsquared))
 
-        # # 2-port matrix
-        # m1_2port = MathTex(r"\mathrm{S}").set_color(YELLOW)
-        # eq_2port = MathTex("=")
-        # m2_2port = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
-        #                    [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(", right_bracket=")", element_alignment_corner=DR-DR)
-        # m1_2port.shift(LEFT*2)
-        # eq_2port.next_to(m1_2port)
-        # m2_2port.next_to(eq_2port)
-        # m2_2port[0][0].set_color(BLUE)
-        # m2_2port[0][1].set_color(GREEN)
-        # m2_2port[0][2].set_color(RED)
-        # m2_2port[0][3].set_color(PURPLE)
+        # 2-port matrix
+        m1_2port = MathTex(r"\mathrm{S}").set_color(YELLOW)
+        eq_2port = MathTex("=")
+        m2_2port = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
+                           [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(", right_bracket=")", element_alignment_corner=DR-DR)
+        m1_2port.shift(LEFT*2)
+        eq_2port.next_to(m1_2port)
+        m2_2port.next_to(eq_2port)
+        m2_2port[0][0].set_color(BLUE)
+        m2_2port[0][1].set_color(GREEN)
+        m2_2port[0][2].set_color(RED)
+        m2_2port[0][3].set_color(PURPLE)
         
-        # g_2port = VGroup(m1_2port, m2_2port, eq_2port).next_to(long_right_arrow_wave).scale(2).shift(RIGHT*2.5+UP*0)
+        g_2port = VGroup(m1_2port, m2_2port, eq_2port).next_to(long_right_arrow_wave).scale(2).shift(RIGHT*2.5+UP*0)
 
-        # self.play(Write(g_2port))
-        # self.wait(3)
+        self.play(Write(g_2port))
+        self.wait(3)
 
-        # # Framebox S21
+        # Framebox S21
 
-        # framebox_s21 = SurroundingRectangle(m2_2port[0][2], buff = .2)
-        # self.play(Create(framebox_s21))
-        # self.wait(3)
+        framebox_s21 = SurroundingRectangle(m2_2port[0][2], buff = .2)
+        self.play(Create(framebox_s21))
+        self.wait(3)
 
-        # # Display S21 curve
-        # lowpass_s21 = ax.plot(lambda x: 10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))), x_range=[2.186, 5], color=RED)
-        # lowpass_s21_flat = ax.plot(lambda x: 0, x_range=[0, 2.186], color=RED)
+        # Display S21 curve
+        lowpass_s21 = ax.plot(lambda x: 10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))), x_range=[2.186, 5], color=RED)
+        lowpass_s21_flat = ax.plot(lambda x: 0, x_range=[0, 2.186], color=RED)
 
-        # line1 = ax.get_vertical_line(
-        #     ax.i2gp(3.5, lowpass_s21), line_func=DashedLine, stroke_width=8, color=ORANGE
-        # )
+        line1 = ax.get_vertical_line(
+            ax.i2gp(3.5, lowpass_s21), line_func=DashedLine, stroke_width=8, color=ORANGE
+        )
 
-        # cutoff_label=MathTex("-3 \mathrm{ \ dB}").next_to(R_source_50).scale(1.1).shift(RIGHT*15.8+UP*6.5)
+        cutoff_label=MathTex("-3 \mathrm{ \ dB}").next_to(R_source_50).scale(1.1).shift(RIGHT*15.8+UP*6.5)
         
-        # self.play(
-        #     AnimationGroup(
-        #         Write(lowpass_s21_flat),
-        #         Write(lowpass_s21),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
-        # self.wait(3)
-        # self.play(Write(line1),Write(cutoff_label))
+        self.play(
+            AnimationGroup(
+                Write(lowpass_s21_flat),
+                Write(lowpass_s21),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
+        self.wait(3)
+        self.play(Write(line1),Write(cutoff_label))
 
-        # self.wait(3)
+        self.wait(3)
 
-        # framebox_s12 = SurroundingRectangle(m2_2port[0][1], buff = .2)
+        framebox_s12 = SurroundingRectangle(m2_2port[0][1], buff = .2)
 
-        # # Display S12 curve
-        # lowpass_s12 = ax.plot(lambda x: 10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))), x_range=[2.186, 5], color=GREEN)
-        # lowpass_s12_flat = ax.plot(lambda x: 0, x_range=[0, 2.186], color=GREEN)
+        # Display S12 curve
+        lowpass_s12 = ax.plot(lambda x: 10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))), x_range=[2.186, 5], color=GREEN)
+        lowpass_s12_flat = ax.plot(lambda x: 0, x_range=[0, 2.186], color=GREEN)
 
-        # self.play(
-        #     AnimationGroup(
-        #         ReplacementTransform(framebox_s21, framebox_s12),
-        #         Write(lowpass_s12_flat),
-        #         Write(lowpass_s12),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         ),
-        #     #AnimationGroup(
-        #     #    Uncreate(lowpass_s21),
-        #     #    Uncreate(lowpass_s21_flat),
-        #     #    run_time=3,
-        #     #    lag_ratio=0.5
-        #     #)
-        # )
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(framebox_s21, framebox_s12),
+                Write(lowpass_s12_flat),
+                Write(lowpass_s12),
+                run_time=3,
+                lag_ratio=0.5
+                ),
+            #AnimationGroup(
+            #    Uncreate(lowpass_s21),
+            #    Uncreate(lowpass_s21_flat),
+            #    run_time=3,
+            #    lag_ratio=0.5
+            #)
+        )
         
-        # self.wait(3)
+        self.wait(3)
 
-        # # Hide S21 and S12 curves
+        # Hide S21 and S12 curves
 
-        # self.play(
-        # #    AnimationGroup(
-        # #        Uncreate(lowpass_s12),
-        # #        Uncreate(lowpass_s12_flat),
-        # #        run_time=3,
-        # #        lag_ratio=0.5
-        # #    ),
-        #     Uncreate(line1),
-        #     FadeOut(cutoff_label)
-        # )
+        self.play(
+        #    AnimationGroup(
+        #        Uncreate(lowpass_s12),
+        #        Uncreate(lowpass_s12_flat),
+        #        run_time=3,
+        #        lag_ratio=0.5
+        #    ),
+            Uncreate(line1),
+            FadeOut(cutoff_label)
+        )
         
-        # self.wait(3)
+        self.wait(3)
 
-        # # Display s11 curve
-        # lowpass_s11 = ax.plot(lambda x: 10*np.log10(1-10**((10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))))/10)), x_range=[2.3976, 5], color=BLUE)
-        # lowpass_s11_flat = ax.plot(lambda x: -30, x_range=[0, 2.3976], color=BLUE)
+        # Display s11 curve
+        lowpass_s11 = ax.plot(lambda x: 10*np.log10(1-10**((10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))))/10)), x_range=[2.3976, 5], color=BLUE)
+        lowpass_s11_flat = ax.plot(lambda x: -30, x_range=[0, 2.3976], color=BLUE)
 
-        # framebox_s11 = SurroundingRectangle(m2_2port[0][0], buff = .2)
-        # self.play(
-        #     ReplacementTransform(framebox_s12, framebox_s11),
-        #     AnimationGroup(
-        #         Write(lowpass_s11_flat),
-        #         Write(lowpass_s11),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        framebox_s11 = SurroundingRectangle(m2_2port[0][0], buff = .2)
+        self.play(
+            ReplacementTransform(framebox_s12, framebox_s11),
+            AnimationGroup(
+                Write(lowpass_s11_flat),
+                Write(lowpass_s11),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.wait(3)
+        self.wait(3)
 
-        # framebox_s22 = SurroundingRectangle(m2_2port[0][3], buff = .2)
+        framebox_s22 = SurroundingRectangle(m2_2port[0][3], buff = .2)
 
-        # # Display S22 curve
-        # lowpass_s22 = ax.plot(lambda x: 10*np.log10(1-10**((10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))))/10)), x_range=[2.3976, 5], color=PURPLE)
-        # lowpass_s22_flat = ax.plot(lambda x: -30, x_range=[0, 2.3976], color=PURPLE)
+        # Display S22 curve
+        lowpass_s22 = ax.plot(lambda x: 10*np.log10(1-10**((10*np.log10(float(1)/float(math.sqrt(1+((x-2.186)**(2*2))))))/10)), x_range=[2.3976, 5], color=PURPLE)
+        lowpass_s22_flat = ax.plot(lambda x: -30, x_range=[0, 2.3976], color=PURPLE)
 
-        # self.play(
-        #     AnimationGroup(
-        #         ReplacementTransform(framebox_s11, framebox_s22),
-        #         Write(lowpass_s22_flat),
-        #         Write(lowpass_s22),
-        #         run_time=3,
-        #         lag_ratio=0.5
-        #         )
-        # )
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(framebox_s11, framebox_s22),
+                Write(lowpass_s22_flat),
+                Write(lowpass_s22),
+                run_time=3,
+                lag_ratio=0.5
+                )
+        )
 
-        # self.wait(3)
+        self.wait(3)
 
-        # # Hide curves section
-        # self.play(
-        #     Uncreate(framebox_s22),
-        #     AnimationGroup(
-        #         Uncreate(lowpass_s11),
-        #         Uncreate(lowpass_s22),
-        #         Uncreate(lowpass_s21),
-        #         Uncreate(lowpass_s12)
-        #     ),
-        #     run_time=1.5,
-        #     lag_ratio=0.5
-        # )
-        # self.play(
-        #     AnimationGroup(
-        #         Uncreate(lowpass_s11_flat),
-        #         Uncreate(lowpass_s22_flat),
-        #         Uncreate(lowpass_s21_flat),
-        #         Uncreate(lowpass_s12_flat)
-        #     ),
-        #     run_time=1.5,
-        #     lag_ratio=0.5
-        # )
+        # Hide curves section
+        self.play(
+            Uncreate(framebox_s22),
+            AnimationGroup(
+                Uncreate(lowpass_s11),
+                Uncreate(lowpass_s22),
+                Uncreate(lowpass_s21),
+                Uncreate(lowpass_s12)
+            ),
+            run_time=1.5,
+            lag_ratio=0.5
+        )
+        self.play(
+            AnimationGroup(
+                Uncreate(lowpass_s11_flat),
+                Uncreate(lowpass_s22_flat),
+                Uncreate(lowpass_s21_flat),
+                Uncreate(lowpass_s12_flat)
+            ),
+            run_time=1.5,
+            lag_ratio=0.5
+        )
 
 
-        # #FadeOutAndShift(circuit_lowpass, direction=DOWN),
-        # #FadeOutAndShift(R_source_50, direction=DOWN),
-        # #FadeOutAndShift(R_load_50, direction=DOWN),
+        #FadeOutAndShift(circuit_lowpass, direction=DOWN),
+        #FadeOutAndShift(R_source_50, direction=DOWN),
+        #FadeOutAndShift(R_load_50, direction=DOWN),
         
-        # #FadeOutAndShift(long_right_arrow_wave, direction=RIGHT),
-        # #Uncreate(s11_mag),
-        # #Uncreate(nsquared)
-        # #run_time=2)
-        # self.wait(3)
+        #FadeOutAndShift(long_right_arrow_wave, direction=RIGHT),
+        #Uncreate(s11_mag),
+        #Uncreate(nsquared)
+        #run_time=2)
+        self.wait(3)
 
 
 

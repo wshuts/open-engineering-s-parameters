@@ -5,9 +5,22 @@ class LowPass(MovingCameraScene):
         texTemplate = TexTemplate()
         texTemplate.add_to_preamble(r"\usepackage{circuitikz}")
 
-        circuitString="""\\begin{circuitikz}
-            \draw (0,0) to[R, l=$R_1$, f=$i_1$] (2,0);
-            \end{circuitikz}"""
+        circuitString="""\\begin{circuitikz}[american, scale=0.5, transform shape]
+            \draw (0, 0)
+                to [sV] ++(0, -4) node[ground]{};
+            \draw (0, 0)
+                to [R, -*] ++(4, 0);
+            \draw (4, 0)
+                to [L] ++(4, 0);
+            \draw (8, 0)
+                to [C] ++(0, -4) node[ground]{};
+            \draw (8, 0)
+                to [short, -*] ++(2, 0);
+            \draw (10, 0)
+                to [short] ++(2, 0);
+            \draw (12, 0)
+                to [R] ++(0, -4) node[ground]{};
+	    \end{circuitikz}"""
 
         circuit=Tex(circuitString, tex_template=texTemplate, stroke_width=2, fill_opacity=0)
         self.add(circuit)

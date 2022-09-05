@@ -4,8 +4,36 @@ class Circulator(MovingCameraScene):
     def setup(self):
         MovingCameraScene.setup(self)
     def construct(self):
+        # Crazy Scene Globals
+        ant_symbol = ImageMobject("antenna.png").shift(DOWN*12.5+LEFT*10.5).scale(0.7)
+        
+        ax = Axes(
+            x_range=[-0.06, 5.001, 1],
+            y_range=[-30.01, 0.5, 5],
+            x_length=11,
+            y_length=5.7,
+            x_axis_config={"numbers_to_include": np.arange(0, 5.001, 1), "label_direction": UP},
+            y_axis_config={"numbers_to_include": np.arange(-30.01, 0.5, 5)},
+            tips=False,
+        )
+        ax.shift(DOWN*5.9+RIGHT*2.3).scale(1.25)
+
+        dc_label = MathTex("\mathrm{DC}").next_to(ax).scale(0.9).shift(LEFT*14.29, UP*3.68).set_color(WHITE)
+
+        ax_highfreq = Axes(
+            x_range=[13, 18.001, 1],
+            y_range=[-30.01, 0.5, 5],
+            x_length=10.9,
+            y_length=5.7,
+            x_axis_config={"numbers_to_include": np.arange(13, 18.001, 1), "label_direction": UP},
+            y_axis_config={"numbers_to_include": np.arange(-30.01, 0.5, 5)},
+            tips=False,
+        )
+        ax_highfreq.shift(DOWN*5.9+RIGHT*2.45).scale(1.25)
+
         # Display circulator circuit
         circuit_circulator = ImageMobject("circulator.png").scale(0.9).shift(LEFT*10.4+DOWN*12.9)
+        self.play(FadeIn(circuit_circulator, shift=RIGHT))
 
         # Port 1 Circulator
         port1_num_circ=MathTex("1").set_color(YELLOW)

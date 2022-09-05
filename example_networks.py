@@ -606,19 +606,10 @@ class ExampleNetworks(MovingCameraScene):
 
         self.wait(3)
 
-
-
-
-
-        ### Circulator
-
         self.play(
             x.submobjects[3].animate.set_opacity(0.5),
             x.submobjects[4].animate.set_opacity(1)
         )
-
-        # Display circulator circuit
-        circuit_circulator = ImageMobject("circulator.png").scale(0.9).shift(LEFT*10.4+DOWN*12.9)
 
         self.play(
             Uncreate(attenuator_s11),
@@ -634,9 +625,14 @@ class ExampleNetworks(MovingCameraScene):
             Unwrite(g_2port),
             Unwrite(nsquared),
             FadeOut(long_right_arrow_wave, shift=RIGHT),
-            FadeOut(circuit_attenuator, shift=DOWN),
-            FadeIn(circuit_circulator, shift=RIGHT)
+            FadeOut(circuit_attenuator, shift=DOWN)
         )
+
+        ### Circulator
+
+        # Display circulator circuit
+        circuit_circulator = ImageMobject("circulator.png").scale(0.9).shift(LEFT*10.4+DOWN*12.9)
+        self.play(FadeIn(circuit_circulator, shift=RIGHT))
 
         # Port 1 Circulator
         port1_num_circ=MathTex("1").set_color(YELLOW)

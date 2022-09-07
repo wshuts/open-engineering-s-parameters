@@ -2,9 +2,14 @@ from manim import *
 
 
 class Amplifier(MovingCameraScene):
-    title_properties = None
-    underline_properties = None
-    networks = None
+
+    def __init__(self, camera_class=MovingCamera):
+        super().__init__(camera_class)
+        self.title_properties = None
+        self.underline_properties = None
+        self.networks = None
+        self.circuit_amplifier = None
+        self.ax_amp = None
 
     def setup(self):
         MovingCameraScene.setup(self)
@@ -20,6 +25,16 @@ class Amplifier(MovingCameraScene):
                 dot = MathTex("\\cdot").scale(3)
                 dot.next_to(network[0], LEFT * 0.4, buff=0.4)
                 network.add_to_back(dot)
+            self.circuit_amplifier = ImageMobject("amplifier.png")
+            self.ax_amp = Axes(
+                x_range=[13, 18.001, 1],
+                y_range=[-40.01, 20.5, 10],
+                x_length=10.9,
+                y_length=6.7,
+                x_axis_config={"numbers_to_include": np.arange(13, 18.001, 1), "label_direction": UP},
+                y_axis_config={"numbers_to_include": np.arange(-40.01, 20.5, 10)},
+                tips=False,
+            )
             return
 
         def stage():
@@ -32,6 +47,9 @@ class Amplifier(MovingCameraScene):
             self.networks.scale(1.45)
             self.networks.shift(LEFT * 11.4 + DOWN * 6.1)
             self.networks.set_opacity(0.5)
+            self.circuit_amplifier.scale(0.6).shift(
+                LEFT * 10.6 + DOWN * 12.5).set_z_index(-1)
+            self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
             return
 
         def animate():
@@ -41,6 +59,20 @@ class Amplifier(MovingCameraScene):
             self.play(FadeIn(self.title_properties, shift=LEFT), GrowFromCenter(self.underline_properties))
             self.wait(3)
             self.play(Write(self.networks))
+            self.play(Write(self.ax_amp))
+            self.play(
+                FadeIn(self.circuit_amplifier, shift=RIGHT),
+                # port1_num_circ.animate.shift(DOWN * 0.8 + LEFT * 0.5),
+                # port2_num_circ.animate.shift(DOWN * 0.8 + RIGHT * 0.1),
+                self.networks.submobjects[6].animate.set_opacity(1)
+            )
+            self.wait(3)
+            # self.play(
+            #     Write(plus),
+            #     Write(minus),
+            #     Write(plus_v),
+            #     Write(minus_v)
+            # )
             return
 
         create()

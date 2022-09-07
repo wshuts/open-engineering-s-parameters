@@ -1148,6 +1148,6 @@ class ExampleNetworks(MovingCameraScene):
         self.wait(3)
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 130}):
     scene = ExampleNetworks()
     scene.render()

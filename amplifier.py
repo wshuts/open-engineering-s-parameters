@@ -44,7 +44,7 @@ class Amplifier(MovingCameraScene):
                 y_range=[-40.01, 20.5, 10],
                 x_length=10.9,
                 y_length=6.7,
-                x_axis_config={"numbers_to_include": np.arange(13, 18.001, 1), "label_direction": UP},
+                x_axis_config={"numbers_to_include": np.arange(14, 18.001, 1), "label_direction": UP},
                 y_axis_config={"numbers_to_include": np.arange(-40.01, 20.5, 10)},
                 tips=False,
             )
@@ -81,8 +81,8 @@ class Amplifier(MovingCameraScene):
             self.networks.set_opacity(0.5)
 
             self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
-            self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 4.4).set_color(WHITE)
-            self.magnitude_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 17.2 + DOWN * 0.3)
+            self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 5).set_color(WHITE)
+            self.magnitude_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 18 + DOWN * 0)
             self.magnitude_label.set_color(WHITE).rotate(PI / 2)
 
             self.circuit_amplifier.scale(0.6).shift(

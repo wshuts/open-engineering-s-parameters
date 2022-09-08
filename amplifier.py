@@ -140,10 +140,8 @@ class Amplifier(MovingCameraScene):
 
         def animate():
             self.frame = self.camera.frame
-            self.play(
-                self.frame.animate.set_width(26).move_to(2.2 * LEFT + 8 * DOWN))
+            self.play(self.frame.animate.set_width(26).move_to(2.2 * LEFT + 8 * DOWN))
             self.play(FadeIn(self.title_properties, shift=LEFT), GrowFromCenter(self.underline_properties))
-            self.wait(3)
             self.play(Write(self.networks))
             self.play(Write(self.ax_amp), Write(self.frequency_label), Write(self.magnitude_label))
             self.play(
@@ -152,7 +150,6 @@ class Amplifier(MovingCameraScene):
                 self.port2_num.animate.shift(DOWN * 0.8 + RIGHT * 0.1),
                 self.networks.submobjects[6].animate.set_opacity(1)
             )
-            self.wait(3)
             self.play(
                 Write(self.plus),
                 Write(self.minus),
@@ -160,12 +157,10 @@ class Amplifier(MovingCameraScene):
                 Write(self.minus_v)
             )
             self.play(
-                FadeIn(self.long_right_arrow, shift=RIGHT)
+                FadeIn(self.long_right_arrow, shift=RIGHT),
+                Write(self.n_squared)
             )
-            self.play(
-                Write(self.n_squared),
-                Write(self.grouped_equation)
-            )
+            self.play(Write(self.grouped_equation))
             return
 
         create()

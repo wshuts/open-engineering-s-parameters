@@ -1,3 +1,4 @@
+from colour import Color
 from manim import *
 
 
@@ -24,12 +25,28 @@ class Amplifier(MovingCameraScene):
         self.eq = None
         self.s2p_matrix = None
         self.grouped_equation = None
+        self.amplifier_s11 = None
+        self.amplifier_s12 = None
+        self.amplifier_s21 = None
+        self.amplifier_s22 = None
+        self.s11_amp = None
+        self.s21_amp = None
+        self.s12_amp = None
+        self.s22_amp = None
+        self.frame_box_s11 = None
+        self.frame_box_s21 = None
+        self.frame_box_s12 = None
+        self.frame_box_s22 = None
 
     def setup(self):
         MovingCameraScene.setup(self)
 
     # noinspection PyTypeChecker
     def construct(self):
+        def read_spar(path="manim_gif_data/amplifier/", parameter="s11", ext=".csv", mode="rb", delimiter=","):
+            stream = open(path + parameter + ext, mode)
+            return np.loadtxt(stream, delimiter=delimiter)
+
         def create():
             self.title_properties = Text("Example Networks", color=YELLOW)
             self.underline_properties = Line(LEFT, RIGHT, color=YELLOW)
@@ -62,9 +79,25 @@ class Amplifier(MovingCameraScene):
             self.cap_s = MathTex(r"\mathrm{S}")
             self.eq = MathTex("=")
             self.s2p_matrix = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
-                                      [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(",
-                                     right_bracket=")", element_alignment_corner=DR - DR)
+                                      [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]],
+                                     left_bracket="(", right_bracket=")", element_alignment_corner=DR - DR)
             self.grouped_equation = VGroup(self.cap_s, self.eq, self.s2p_matrix)
+            self.s11_amp = read_spar(parameter="s11")
+            self.s21_amp = read_spar(parameter="s21")
+            self.s12_amp = read_spar(parameter="s12")
+            self.s22_amp = read_spar(parameter="s22")
+            self.amplifier_s11 = self.ax_amp.plot_line_graph(self.s11_amp[:, 0], self.s11_amp[:, 1],
+                                                             add_vertex_dots=False, line_color=Color(BLUE))
+            self.amplifier_s12 = self.ax_amp.plot_line_graph(self.s12_amp[:, 0], self.s12_amp[:, 1],
+                                                             add_vertex_dots=False, line_color=Color(GREEN))
+            self.amplifier_s21 = self.ax_amp.plot_line_graph(self.s21_amp[:, 0], self.s21_amp[:, 1],
+                                                             add_vertex_dots=False, line_color=Color(RED))
+            self.amplifier_s22 = self.ax_amp.plot_line_graph(self.s22_amp[:, 0], self.s22_amp[:, 1],
+                                                             add_vertex_dots=False, line_color=Color(PURPLE))
+            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0], buff=.2)
+            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1], buff=.2)
+            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2], buff=.2)
+            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3], buff=.2)
             return
 
         def stage():

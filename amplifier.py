@@ -16,12 +16,12 @@ class Amplifier(MovingCameraScene):
         self.minus = None
         self.plus_v = None
         self.minus_v = None
-        self.long_right_arrow_wave = None
-        self.n_squared_isolation = None
-        self.m1_2port_isolation = None
-        self.eq_2port_isolation = None
-        self.m2_2port_isolation = None
-        self.g_2port_isolation = None
+        self.long_right_arrow = None
+        self.n_squared = None
+        self.cap_s = None
+        self.eq = None
+        self.s2p_matrix = None
+        self.grouped_equation = None
 
     def setup(self):
         MovingCameraScene.setup(self)
@@ -53,14 +53,14 @@ class Amplifier(MovingCameraScene):
             self.minus = MathTex("-")
             self.plus_v = MathTex("\mathrm{+V}")
             self.minus_v = MathTex("\mathrm{-V}")
-            self.long_right_arrow_wave = Tex('$\Longrightarrow$')
-            self.n_squared_isolation = MathTex("n^2", "=", "4")
-            self.m1_2port_isolation = MathTex(r"\mathrm{S}")
-            self.eq_2port_isolation = MathTex("=")
-            self.m2_2port_isolation = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
-                                              [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(",
-                                             right_bracket=")", element_alignment_corner=DR - DR)
-            self.g_2port_isolation = VGroup(self.m1_2port_isolation, self.m2_2port_isolation, self.eq_2port_isolation)
+            self.long_right_arrow = Tex('$\Longrightarrow$')
+            self.n_squared = MathTex("n^2", "=", "4")
+            self.cap_s = MathTex(r"\mathrm{S}")
+            self.eq = MathTex("=")
+            self.s2p_matrix = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
+                                      [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(",
+                                     right_bracket=")", element_alignment_corner=DR - DR)
+            self.grouped_equation = VGroup(self.cap_s, self.eq, self.s2p_matrix)
             return
 
         def stage():
@@ -111,24 +111,24 @@ class Amplifier(MovingCameraScene):
             self.minus_v.shift(LEFT * 11.04)
             self.minus_v.scale(0.85)
 
-            self.long_right_arrow_wave.scale(5).set_color(WHITE)
-            self.long_right_arrow_wave.shift(DOWN * 12.5 + RIGHT * 1)
+            self.long_right_arrow.scale(5).set_color(WHITE)
+            self.long_right_arrow.shift(LEFT * 4 + DOWN * 12.5)
 
-            self.n_squared_isolation.next_to(self.long_right_arrow_wave).scale(1.6).shift(LEFT * 3.25 + UP * 0.9)
-            self.n_squared_isolation[0].set_color(YELLOW)
-            self.n_squared_isolation[1].set_color(WHITE)
-            self.n_squared_isolation[2].set_color(YELLOW)
+            self.n_squared.next_to(self.long_right_arrow).scale(1.6).shift(LEFT * 3.25 + UP * 0.9)
+            self.n_squared[0].set_color(YELLOW)
+            self.n_squared[1].set_color(WHITE)
+            self.n_squared[2].set_color(YELLOW)
 
-            self.m1_2port_isolation.set_color(YELLOW)
-            self.m1_2port_isolation.shift(LEFT * 2)
-            self.eq_2port_isolation.next_to(self.m1_2port_isolation)
-            self.m2_2port_isolation.next_to(self.eq_2port_isolation)
-            self.m2_2port_isolation[0][0].set_color(BLUE)
-            self.m2_2port_isolation[0][1].set_color(GREEN)
-            self.m2_2port_isolation[0][2].set_color(RED)
-            self.m2_2port_isolation[0][3].set_color(PURPLE)
+            self.cap_s.set_color(YELLOW)
+            self.cap_s.shift(LEFT * 2)
+            self.eq.next_to(self.cap_s)
+            self.s2p_matrix.next_to(self.eq)
+            self.s2p_matrix[0][0].set_color(BLUE)
+            self.s2p_matrix[0][1].set_color(GREEN)
+            self.s2p_matrix[0][2].set_color(RED)
+            self.s2p_matrix[0][3].set_color(PURPLE)
 
-            self.g_2port_isolation.next_to(self.long_right_arrow_wave).scale(2).shift(RIGHT * 3.2 + UP * 0)
+            self.grouped_equation.next_to(self.long_right_arrow).scale(2).shift(RIGHT * 3.2 + UP * 0)
             return
 
         def animate():
@@ -153,11 +153,11 @@ class Amplifier(MovingCameraScene):
                 Write(self.minus_v)
             )
             self.play(
-                FadeIn(self.long_right_arrow_wave, shift=RIGHT)
+                FadeIn(self.long_right_arrow, shift=RIGHT)
             )
             self.play(
-                Write(self.n_squared_isolation),
-                Write(self.g_2port_isolation)
+                Write(self.n_squared),
+                Write(self.grouped_equation)
             )
             return
 

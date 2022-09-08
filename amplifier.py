@@ -47,6 +47,16 @@ class Amplifier(MovingCameraScene):
             stream = open(path + parameter + ext, mode)
             return np.loadtxt(stream, delimiter=delimiter)
 
+        def scale_array_column(array, column=0, scaling_factor=1e9):
+            scaled_array = np.copy(array)
+            scaled_array[:, column] /= scaling_factor
+            return scaled_array
+
+        def shift_array_column(array, column=1, offset=10):
+            scaled_array = np.copy(array)
+            scaled_array[:, column] += offset
+            return scaled_array
+
         def create():
             self.title_properties = Text("Example Networks", color=YELLOW)
             self.underline_properties = Line(LEFT, RIGHT, color=YELLOW)
@@ -86,6 +96,13 @@ class Amplifier(MovingCameraScene):
             self.s21_amp = read_spar(parameter="s21")
             self.s12_amp = read_spar(parameter="s12")
             self.s22_amp = read_spar(parameter="s22")
+            self.s11_amp = scale_array_column(self.s11_amp)
+            self.s21_amp = scale_array_column(self.s21_amp)
+            self.s12_amp = scale_array_column(self.s12_amp)
+            self.s22_amp = scale_array_column(self.s22_amp)
+            self.s21_amp = shift_array_column(self.s21_amp, offset=-10)
+            self.s12_amp = shift_array_column(self.s12_amp)
+
             self.amplifier_s11 = self.ax_amp.plot_line_graph(self.s11_amp[:, 0], self.s11_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(BLUE))
             self.amplifier_s12 = self.ax_amp.plot_line_graph(self.s12_amp[:, 0], self.s12_amp[:, 1],

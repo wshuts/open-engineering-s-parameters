@@ -8,8 +8,10 @@ class Amplifier(MovingCameraScene):
         self.title_properties = None
         self.underline_properties = None
         self.networks = None
-        self.circuit_amplifier = None
         self.ax_amp = None
+        self.frequency_label = None
+        self.magnitude_label = None
+        self.circuit_amplifier = None
         self.port1_num = None
         self.port2_num = None
         self.plus = None
@@ -37,7 +39,6 @@ class Amplifier(MovingCameraScene):
                 dot = MathTex("\\cdot")
                 dot.scale(3).next_to(network[0], LEFT * 0.4, buff=0.4)
                 network.add_to_back(dot)
-            self.circuit_amplifier = ImageMobject("amplifier.png")
             self.ax_amp = Axes(
                 x_range=[13, 18.001, 1],
                 y_range=[-40.01, 20.5, 10],
@@ -47,6 +48,9 @@ class Amplifier(MovingCameraScene):
                 y_axis_config={"numbers_to_include": np.arange(-40.01, 20.5, 10)},
                 tips=False,
             )
+            self.frequency_label = MathTex("\mathrm{Frequency \ (GHz)}")
+            self.magnitude_label = MathTex("\mathrm{Magnitude \ (dB)}")
+            self.circuit_amplifier = ImageMobject("amplifier.png")
             self.port1_num = MathTex("1")
             self.port2_num = MathTex("2")
             self.plus = MathTex("+")
@@ -76,10 +80,13 @@ class Amplifier(MovingCameraScene):
             self.networks.shift(LEFT * 11.4 + DOWN * 6.1)
             self.networks.set_opacity(0.5)
 
+            self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
+            self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 4.4).set_color(WHITE)
+            self.magnitude_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 17.2 + DOWN * 0.3)
+            self.magnitude_label.set_color(WHITE).rotate(PI / 2)
+
             self.circuit_amplifier.scale(0.6).shift(
                 LEFT * 10.6 + DOWN * 12.5).set_z_index(-1)
-
-            self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
 
             self.port1_num.set_color(YELLOW)
             self.port1_num.shift(DOWN * 11.4)
@@ -138,7 +145,7 @@ class Amplifier(MovingCameraScene):
             self.play(FadeIn(self.title_properties, shift=LEFT), GrowFromCenter(self.underline_properties))
             self.wait(3)
             self.play(Write(self.networks))
-            self.play(Write(self.ax_amp))
+            self.play(Write(self.ax_amp), Write(self.frequency_label), Write(self.magnitude_label))
             self.play(
                 FadeIn(self.circuit_amplifier, shift=RIGHT),
                 self.port1_num.animate.shift(DOWN * 0.8 + LEFT * 0.5),

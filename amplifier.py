@@ -16,6 +16,12 @@ class Amplifier(MovingCameraScene):
         self.minus = None
         self.plus_v = None
         self.minus_v = None
+        self.long_right_arrow_wave = None
+        self.n_squared_isolation = None
+        self.m1_2port_isolation = None
+        self.eq_2port_isolation = None
+        self.m2_2port_isolation = None
+        self.g_2port_isolation = None
 
     def setup(self):
         MovingCameraScene.setup(self)
@@ -47,6 +53,14 @@ class Amplifier(MovingCameraScene):
             self.minus = MathTex("-")
             self.plus_v = MathTex("\mathrm{+V}")
             self.minus_v = MathTex("\mathrm{-V}")
+            self.long_right_arrow_wave = Tex('$\Longrightarrow$')
+            self.n_squared_isolation = MathTex("n^2", "=", "4")
+            self.m1_2port_isolation = MathTex(r"\mathrm{S}")
+            self.eq_2port_isolation = MathTex("=")
+            self.m2_2port_isolation = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
+                                              [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]], left_bracket="(",
+                                             right_bracket=")", element_alignment_corner=DR - DR)
+            self.g_2port_isolation = VGroup(self.m1_2port_isolation, self.m2_2port_isolation, self.eq_2port_isolation)
             return
 
         def stage():
@@ -96,6 +110,25 @@ class Amplifier(MovingCameraScene):
             self.minus_v.shift(DOWN * 14.1)
             self.minus_v.shift(LEFT * 11.04)
             self.minus_v.scale(0.85)
+
+            self.long_right_arrow_wave.scale(5).set_color(WHITE)
+            self.long_right_arrow_wave.shift(DOWN * 12.5 + RIGHT * 1)
+
+            self.n_squared_isolation.next_to(self.long_right_arrow_wave).scale(1.6).shift(LEFT * 3.25 + UP * 0.9)
+            self.n_squared_isolation[0].set_color(YELLOW)
+            self.n_squared_isolation[1].set_color(WHITE)
+            self.n_squared_isolation[2].set_color(YELLOW)
+
+            self.m1_2port_isolation.set_color(YELLOW)
+            self.m1_2port_isolation.shift(LEFT * 2)
+            self.eq_2port_isolation.next_to(self.m1_2port_isolation)
+            self.m2_2port_isolation.next_to(self.eq_2port_isolation)
+            self.m2_2port_isolation[0][0].set_color(BLUE)
+            self.m2_2port_isolation[0][1].set_color(GREEN)
+            self.m2_2port_isolation[0][2].set_color(RED)
+            self.m2_2port_isolation[0][3].set_color(PURPLE)
+
+            self.g_2port_isolation.next_to(self.long_right_arrow_wave).scale(2).shift(RIGHT * 3.2 + UP * 0)
             return
 
         def animate():
@@ -118,6 +151,13 @@ class Amplifier(MovingCameraScene):
                 Write(self.minus),
                 Write(self.plus_v),
                 Write(self.minus_v)
+            )
+            self.play(
+                FadeIn(self.long_right_arrow_wave, shift=RIGHT)
+            )
+            self.play(
+                Write(self.n_squared_isolation),
+                Write(self.g_2port_isolation)
             )
             return
 

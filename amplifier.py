@@ -211,6 +211,35 @@ class Amplifier(MovingCameraScene):
                 Write(self.n_squared)
             )
             self.play(Write(self.grouped_equation))
+            self.play(
+                AnimationGroup(
+                    Create(self.frame_box_s11),
+                    Write(self.amplifier_s11),
+                    run_time=3, lag_ratio=0.5
+                )
+            )
+            self.play(
+                AnimationGroup(
+                    ReplacementTransform(self.frame_box_s11, self.frame_box_s12),
+                    Write(self.amplifier_s12),
+                    run_time=3, lag_ratio=0.5
+                )
+            )
+            self.play(
+                AnimationGroup(
+                    ReplacementTransform(self.frame_box_s12, self.frame_box_s21),
+                    Write(self.amplifier_s21),
+                    run_time=3, lag_ratio=0.5
+                )
+            )
+            self.play(
+                AnimationGroup(
+                    ReplacementTransform(self.frame_box_s21, self.frame_box_s22),
+                    Write(self.amplifier_s22),
+                    run_time=3, lag_ratio=0.5
+                )
+            )
+            self.play(Uncreate(self.frame_box_s22))
             return
 
         create()
@@ -218,6 +247,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 0}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 8,
+                 "upto_animation_number": 8}):
     scene = Amplifier()
     scene.render()

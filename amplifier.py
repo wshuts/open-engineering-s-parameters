@@ -16,6 +16,7 @@ class Amplifier(MovingCameraScene):
         self.title = None
         self.underline = None
         self.networks = None
+        self.title_group = None
         self.ax_amp = None
         self.frequency_label = None
         self.magnitude_label = None
@@ -78,6 +79,7 @@ class Amplifier(MovingCameraScene):
                 dot = MathTex("\\cdot")
                 dot.scale(3).next_to(network[0], LEFT * 0.4, buff=0.4)
                 network.add_to_back(dot)
+            self.title_group = VGroup(self.title, self.underline, self.networks)
             self.ax_amp = Axes(
                 x_range=[13, 18.001, 1],
                 y_range=[-40.01, 20.5, 10],
@@ -141,8 +143,7 @@ class Amplifier(MovingCameraScene):
             self.networks.next_to(self.underline, DOWN)
             self.networks.set_opacity(0.5)
 
-            title_group = VGroup(self.title, self.underline, self.networks)
-            title_group.shift(8 * LEFT + 3.6 * UP)
+            self.title_group.shift(8 * LEFT + 3.6 * UP)
 
             self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
             self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 5).set_color(WHITE)
@@ -261,7 +262,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 7,
-                 "upto_animation_number": 7}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 6,
+                 "upto_animation_number": 6}):
     scene = Amplifier()
     scene.render()

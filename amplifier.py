@@ -167,19 +167,19 @@ class Amplifier(MovingCameraScene):
 
             self.plus.set_color(WHITE)
             self.plus.scale(0.9)
-            self.plus.shift(8 * LEFT + 4 * DOWN)
+            self.plus.shift(7.5 * LEFT + 2 * DOWN)
 
             self.minus.set_color(WHITE)
             self.minus.scale(0.9)
-            self.minus.shift(8 * LEFT + 4 * DOWN)
+            self.minus.shift(6.5 * LEFT + 2 * DOWN)
 
             self.plus_v.set_color(WHITE)
             self.plus_v.scale(0.85)
-            self.plus_v.shift(8 * LEFT + 4 * DOWN)
+            self.plus_v.shift(8 * LEFT + 3 * DOWN)
 
             self.minus_v.set_color(WHITE)
             self.minus_v.scale(0.85)
-            self.minus_v.shift(8 * LEFT + 4 * DOWN)
+            self.minus_v.shift(8 * LEFT + 5.5 * DOWN)
 
             self.long_right_arrow.scale(5).set_color(WHITE)
             self.long_right_arrow.shift(LEFT * 4 + DOWN * 12.5)

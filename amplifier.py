@@ -160,8 +160,8 @@ class Amplifier(MovingCameraScene):
 
             self.axes_group.shift(6.5 * RIGHT + 3 * UP)
 
-            self.circuit_amplifier.scale(0.6).shift(
-                LEFT * 10.6 + DOWN * 12.5).set_z_index(-1)
+            self.circuit_amplifier.scale(0.6).set_z_index(-1)
+            self.circuit_amplifier.shift(8 * LEFT + 4 * DOWN)
 
             self.port1_num.set_color(YELLOW)
             self.port1_num.shift(DOWN * 11.4)

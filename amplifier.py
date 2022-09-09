@@ -20,6 +20,7 @@ class Amplifier(MovingCameraScene):
         self.ax_amp = None
         self.frequency_label = None
         self.magnitude_label = None
+        self.axes_group = None
         self.circuit_amplifier = None
         self.port1_num = None
         self.port2_num = None
@@ -81,16 +82,17 @@ class Amplifier(MovingCameraScene):
                 network.add_to_back(dot)
             self.title_group = VGroup(self.title, self.underline, self.networks)
             self.ax_amp = Axes(
-                x_range=[13, 18.001, 1],
-                y_range=[-40.01, 20.5, 10],
-                x_length=10.9,
-                y_length=6.7,
-                x_axis_config={"numbers_to_include": np.arange(14, 18.001, 1), "label_direction": UP},
-                y_axis_config={"numbers_to_include": np.arange(-40.01, 20.5, 10)},
+                x_range=[13, 18, 1],
+                y_range=[-40, 20, 10],
+                x_length=10,
+                y_length=6,
+                x_axis_config={"numbers_to_include": np.arange(14, 19, 1), "label_direction": UP},
+                y_axis_config={"numbers_to_include": np.arange(-40, 30, 10)},
                 tips=False,
             )
             self.frequency_label = MathTex("\mathrm{Frequency \ (GHz)}")
             self.magnitude_label = MathTex("\mathrm{Magnitude \ (dB)}")
+            self.axes_group = VGroup(self.ax_amp, self.frequency_label, self.magnitude_label)
             self.circuit_amplifier = ImageMobject("amplifier.png")
             self.port1_num = MathTex("1")
             self.port2_num = MathTex("2")
@@ -145,10 +147,12 @@ class Amplifier(MovingCameraScene):
 
             self.title_group.shift(8 * LEFT + 3.6 * UP)
 
-            self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
-            self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 5).set_color(WHITE)
-            self.magnitude_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 18 + DOWN * 0)
-            self.magnitude_label.set_color(WHITE).rotate(PI / 2)
+            self.ax_amp.scale(1.25)
+            self.frequency_label.next_to(self.ax_amp, UP).scale(1.1).set_color(WHITE)
+            self.magnitude_label.next_to(self.ax_amp, LEFT).scale(1.1).set_color(WHITE)
+            self.magnitude_label.rotate(PI / 2)
+
+            self.axes_group.shift(6.5 * RIGHT + 3 * UP)
 
             self.circuit_amplifier.scale(0.6).shift(
                 LEFT * 10.6 + DOWN * 12.5).set_z_index(-1)

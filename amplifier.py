@@ -3,7 +3,7 @@ from manim import *
 
 PAN_CAMERA_DOWN = 0
 PAN_CAMERA_LEFT = 0
-DEFAULT_WIDTH = 8*(16/9)
+DEFAULT_WIDTH = 8 * (16 / 9)
 FRAME_WIDTH = 2 * DEFAULT_WIDTH
 
 
@@ -28,7 +28,6 @@ class Amplifier(MovingCameraScene):
         self.minus = None
         self.plus_v = None
         self.minus_v = None
-        self.circuit_group = None
         self.long_right_arrow = None
         self.n_squared = None
         self.cap_s = None
@@ -101,11 +100,6 @@ class Amplifier(MovingCameraScene):
             self.minus = MathTex("-")
             self.plus_v = MathTex("\mathrm{+V}")
             self.minus_v = MathTex("\mathrm{-V}")
-            self.circuit_group = VGroup(
-                self.port1_num, self.port2_num,
-                self.plus, self.minus,
-                self.plus_v, self.minus_v
-            )
             self.long_right_arrow = Tex('$\Longrightarrow$')
             self.n_squared = MathTex("n^2", "=", "4")
             self.cap_s = MathTex(r"\mathrm{S}")
@@ -164,36 +158,28 @@ class Amplifier(MovingCameraScene):
             self.circuit_amplifier.shift(8 * LEFT + 4 * DOWN)
 
             self.port1_num.set_color(YELLOW)
-            self.port1_num.shift(DOWN * 11.4)
-            self.port1_num.shift(LEFT * 12.75)
             self.port1_num.scale(1.8)
+            self.port1_num.shift(10.5 * LEFT + 3.6 * DOWN)
 
             self.port2_num.set_color(YELLOW)
-            self.port2_num.shift(DOWN * 11.4)
-            self.port2_num.shift(LEFT * 8.1)
             self.port2_num.scale(1.8)
+            self.port2_num.shift(5.5 * LEFT + 3.6 * DOWN)
 
             self.plus.set_color(WHITE)
-            self.plus.shift(DOWN * 10.5)
-            self.plus.shift(LEFT * 10.1)
             self.plus.scale(0.9)
+            self.plus.shift(8 * LEFT + 4 * DOWN)
 
             self.minus.set_color(WHITE)
-            self.minus.shift(DOWN * 10.5)
-            self.minus.shift(LEFT * 9.3)
             self.minus.scale(0.9)
+            self.minus.shift(8 * LEFT + 4 * DOWN)
 
             self.plus_v.set_color(WHITE)
-            self.plus_v.shift(DOWN * 11.1)
-            self.plus_v.shift(LEFT * 11.04)
             self.plus_v.scale(0.85)
+            self.plus_v.shift(8 * LEFT + 4 * DOWN)
 
             self.minus_v.set_color(WHITE)
-            self.minus_v.shift(DOWN * 14.1)
-            self.minus_v.shift(LEFT * 11.04)
             self.minus_v.scale(0.85)
-
-            self.circuit_group.shift(0 * RIGHT + 0 * UP)
+            self.minus_v.shift(8 * LEFT + 4 * DOWN)
 
             self.long_right_arrow.scale(5).set_color(WHITE)
             self.long_right_arrow.shift(LEFT * 4 + DOWN * 12.5)
@@ -223,8 +209,8 @@ class Amplifier(MovingCameraScene):
             self.play(Write(self.ax_amp), Write(self.frequency_label), Write(self.magnitude_label))
             self.play(
                 FadeIn(self.circuit_amplifier, shift=RIGHT),
-                self.port1_num.animate.shift(DOWN * 0.8 + LEFT * 0.5),
-                self.port2_num.animate.shift(DOWN * 0.8 + RIGHT * 0.1),
+                Write(self.port1_num),
+                Write(self.port2_num),
                 self.networks.submobjects[6].animate.set_opacity(1)
             )
             self.play(

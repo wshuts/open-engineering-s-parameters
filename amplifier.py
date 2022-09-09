@@ -1,8 +1,8 @@
 from colour import Color
 from manim import *
 
-PAN_CAMERA_DOWN = 8
-PAN_CAMERA_LEFT = 2.2
+PAN_CAMERA_DOWN = 0
+PAN_CAMERA_LEFT = 0
 DEFAULT_WIDTH = 8*(16/9)
 FRAME_WIDTH = 2 * DEFAULT_WIDTH
 
@@ -13,8 +13,8 @@ class Amplifier(MovingCameraScene):
         super().__init__(camera_class)
         self.frame = self.camera.frame
         self.number_plane = NumberPlane()
-        self.title_properties = None
-        self.underline_properties = None
+        self.title = None
+        self.underline = None
         self.networks = None
         self.ax_amp = None
         self.frequency_label = None
@@ -52,7 +52,6 @@ class Amplifier(MovingCameraScene):
         self.add(self.number_plane)
         self.number_plane.width = FRAME_WIDTH
         self.number_plane.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
-        self.add(Circle())
 
     # noinspection PyTypeChecker
     def construct(self):
@@ -71,8 +70,8 @@ class Amplifier(MovingCameraScene):
             return scaled_array
 
         def create():
-            self.title_properties = Text("Example Networks", color=YELLOW)
-            self.underline_properties = Line(LEFT, RIGHT, color=YELLOW)
+            self.title = Text("Example Networks", color=YELLOW)
+            self.underline = Line(LEFT, RIGHT, color=YELLOW)
             self.networks = Tex("Antennas", "Dummy Loads", "Filters", "Attenuators", "Circulators", "Isolators",
                                 "Amplifiers")
             for network in self.networks:
@@ -131,17 +130,19 @@ class Amplifier(MovingCameraScene):
             return
 
         def stage():
-            self.title_properties.scale(1.2)
-            self.title_properties.to_edge(UP).shift(LEFT * 11 + DOWN * 5)
+            self.title.scale(1.2)
+            self.title.to_edge(UP)
 
-            self.underline_properties.width = 1.1 * self.title_properties.width
-            self.underline_properties.next_to(self.title_properties, DOWN)
-            self.underline_properties.shift(UP * 0.1)
+            self.underline.width = 1.1 * self.title.width
+            self.underline.next_to(self.title, DOWN)
 
             self.networks.arrange(DOWN, aligned_edge=LEFT, buff=0.3)
             self.networks.scale(1.45)
-            self.networks.shift(LEFT * 11.4 + DOWN * 6.1)
+            self.networks.next_to(self.underline, DOWN)
             self.networks.set_opacity(0.5)
+
+            title_group = VGroup(self.title, self.underline, self.networks)
+            title_group.shift(8 * LEFT + 3.6 * UP)
 
             self.ax_amp.shift(DOWN * 5.9 + RIGHT * 2.45).scale(1.25)
             self.frequency_label.next_to(self.ax_amp).scale(1.1).shift(LEFT * 9 + UP * 5).set_color(WHITE)
@@ -204,7 +205,7 @@ class Amplifier(MovingCameraScene):
             return
 
         def animate():
-            self.play(FadeIn(self.title_properties, shift=LEFT), GrowFromCenter(self.underline_properties))
+            self.play(FadeIn(self.title, shift=LEFT), GrowFromCenter(self.underline))
             self.play(Write(self.networks))
             self.play(Write(self.ax_amp), Write(self.frequency_label), Write(self.magnitude_label))
             self.play(

@@ -1,11 +1,17 @@
 from colour import Color
 from manim import *
 
+SHIFT_DOWN = 8
+SHIFT_LEFT = 2.2
+WIDTH = 26
+
 
 class Amplifier(MovingCameraScene):
 
     def __init__(self, camera_class=MovingCamera):
         super().__init__(camera_class)
+        self.frame = self.camera.frame
+        self.number_plane = NumberPlane()
         self.title_properties = None
         self.underline_properties = None
         self.networks = None
@@ -40,6 +46,11 @@ class Amplifier(MovingCameraScene):
 
     def setup(self):
         MovingCameraScene.setup(self)
+        self.frame.width = WIDTH
+        self.frame.move_to(SHIFT_LEFT * LEFT + SHIFT_DOWN * DOWN)
+        self.add(self.number_plane)
+        self.number_plane.width = WIDTH
+        self.number_plane.move_to(SHIFT_LEFT * LEFT + SHIFT_DOWN * DOWN)
 
     # noinspection PyTypeChecker
     def construct(self):
@@ -189,8 +200,6 @@ class Amplifier(MovingCameraScene):
             return
 
         def animate():
-            self.frame = self.camera.frame
-            self.play(self.frame.animate.set_width(26).move_to(2.2 * LEFT + 8 * DOWN))
             self.play(FadeIn(self.title_properties, shift=LEFT), GrowFromCenter(self.underline_properties))
             self.play(Write(self.networks))
             self.play(Write(self.ax_amp), Write(self.frequency_label), Write(self.magnitude_label))

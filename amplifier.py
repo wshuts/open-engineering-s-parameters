@@ -3,7 +3,8 @@ from manim import *
 
 PAN_CAMERA_DOWN = 8
 PAN_CAMERA_LEFT = 2.2
-WIDTH = 35
+DEFAULT_WIDTH = 8*(16/9)
+FRAME_WIDTH = 2 * DEFAULT_WIDTH
 
 
 class Amplifier(MovingCameraScene):
@@ -46,11 +47,12 @@ class Amplifier(MovingCameraScene):
 
     def setup(self):
         MovingCameraScene.setup(self)
-        self.frame.width = WIDTH
+        self.frame.width = FRAME_WIDTH
         self.frame.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
         self.add(self.number_plane)
-        self.number_plane.width = WIDTH
+        self.number_plane.width = FRAME_WIDTH
         self.number_plane.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
+        self.add(Circle())
 
     # noinspection PyTypeChecker
     def construct(self):
@@ -197,6 +199,8 @@ class Amplifier(MovingCameraScene):
             self.s2p_matrix[0][3].set_color(PURPLE)
 
             self.grouped_equation.next_to(self.long_right_arrow).scale(2).shift(RIGHT * 3.2 + UP * 0)
+
+            self.frame_box_s11.move_to(ORIGIN)
             return
 
         def animate():

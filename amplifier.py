@@ -106,7 +106,11 @@ class Amplifier(MovingCameraScene):
             self.eq = MathTex("=")
             self.s2p_matrix = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
                                       [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]],
-                                     left_bracket="(", right_bracket=")", element_alignment_corner=DR - DR)
+                                     left_bracket="(", right_bracket=")")
+            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0])
+            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1])
+            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2])
+            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3])
             self.grouped_equation = VGroup(self.cap_s, self.eq, self.s2p_matrix)
             self.s11_amp = read_spar(parameter="s11")
             self.s21_amp = read_spar(parameter="s21")
@@ -127,10 +131,7 @@ class Amplifier(MovingCameraScene):
                                                              add_vertex_dots=False, line_color=Color(RED))
             self.amplifier_s22 = self.ax_amp.plot_line_graph(self.s22_amp[:, 0], self.s22_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(PURPLE))
-            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0], buff=.2)
-            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1], buff=.2)
-            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2], buff=.2)
-            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3], buff=.2)
+
             return
 
         def stage():
@@ -181,26 +182,26 @@ class Amplifier(MovingCameraScene):
             self.minus_v.scale(0.85)
             self.minus_v.shift(8 * LEFT + 5.5 * DOWN)
 
-            self.long_right_arrow.scale(5).set_color(WHITE)
-            self.long_right_arrow.shift(0 * LEFT + 4 * DOWN)
-
-            self.n_squared.next_to(self.long_right_arrow).scale(1.6).shift(LEFT * 3.25 + UP * 0.9)
+            self.long_right_arrow.set_color(WHITE)
             self.n_squared[0].set_color(YELLOW)
             self.n_squared[1].set_color(WHITE)
             self.n_squared[2].set_color(YELLOW)
-
             self.cap_s.set_color(YELLOW)
-            self.cap_s.shift(LEFT * 2)
-            self.eq.next_to(self.cap_s)
-            self.s2p_matrix.next_to(self.eq)
             self.s2p_matrix[0][0].set_color(BLUE)
             self.s2p_matrix[0][1].set_color(GREEN)
             self.s2p_matrix[0][2].set_color(RED)
             self.s2p_matrix[0][3].set_color(PURPLE)
 
-            self.grouped_equation.next_to(self.long_right_arrow).scale(2).shift(RIGHT * 3.2 + UP * 0)
+            self.long_right_arrow.scale(5)
+            self.n_squared.scale(1.6)
+            self.grouped_equation.scale(1.6)
 
-            self.frame_box_s11.move_to(ORIGIN)
+            self.eq.next_to(self.cap_s)
+            self.s2p_matrix.next_to(self.eq)
+
+            self.n_squared.shift(0.2 * LEFT + 2.5 * DOWN)
+            self.long_right_arrow.shift(0 * RIGHT + 4 * DOWN)
+            self.grouped_equation.shift(4 * RIGHT + 4 * DOWN)
             return
 
         def animate():
@@ -260,7 +261,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 6,
-                 "upto_animation_number": 6}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 10,
+                 "upto_animation_number": 10}):
     scene = Amplifier()
     scene.render()

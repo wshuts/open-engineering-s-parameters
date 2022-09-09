@@ -20,7 +20,6 @@ class Amplifier(MovingCameraScene):
         self.ax_amp = None
         self.frequency_label = None
         self.magnitude_label = None
-        self.axes_group = None
         self.circuit_amplifier = None
         self.port1_num = None
         self.port2_num = None
@@ -34,6 +33,10 @@ class Amplifier(MovingCameraScene):
         self.eq = None
         self.s2p_matrix = None
         self.grouped_equation = None
+        self.frame_box_s11 = None
+        self.frame_box_s21 = None
+        self.frame_box_s12 = None
+        self.frame_box_s22 = None
         self.amplifier_s11 = None
         self.amplifier_s12 = None
         self.amplifier_s21 = None
@@ -42,10 +45,7 @@ class Amplifier(MovingCameraScene):
         self.s21_amp = None
         self.s12_amp = None
         self.s22_amp = None
-        self.frame_box_s11 = None
-        self.frame_box_s21 = None
-        self.frame_box_s12 = None
-        self.frame_box_s22 = None
+        self.graph_group = None
 
     def setup(self):
         MovingCameraScene.setup(self)
@@ -92,7 +92,6 @@ class Amplifier(MovingCameraScene):
             )
             self.frequency_label = MathTex("\mathrm{Frequency \ (GHz)}")
             self.magnitude_label = MathTex("\mathrm{Magnitude \ (dB)}")
-            self.axes_group = VGroup(self.ax_amp, self.frequency_label, self.magnitude_label)
             self.circuit_amplifier = ImageMobject("amplifier.png")
             self.port1_num = MathTex("1")
             self.port2_num = MathTex("2")
@@ -107,13 +106,13 @@ class Amplifier(MovingCameraScene):
             self.s2p_matrix = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
                                       [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]],
                                      left_bracket="(", right_bracket=")")
-            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0], buff=0.2)
+            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0], buff=0.4)
             self.frame_box_s11.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][0]))
-            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1], buff=0.2)
+            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1], buff=0.4)
             self.frame_box_s12.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][1]))
-            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2], buff=0.2)
+            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2], buff=0.4)
             self.frame_box_s21.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][2]))
-            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3], buff=0.2)
+            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3], buff=0.4)
             self.frame_box_s22.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][3]))
             self.grouped_equation = VGroup(self.cap_s, self.eq, self.s2p_matrix)
             self.s11_amp = read_spar(parameter="s11")
@@ -129,17 +128,13 @@ class Amplifier(MovingCameraScene):
 
             self.amplifier_s11 = self.ax_amp.plot_line_graph(self.s11_amp[:, 0], self.s11_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(BLUE))
-            self.amplifier_s11.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s12 = self.ax_amp.plot_line_graph(self.s12_amp[:, 0], self.s12_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(GREEN))
-            self.amplifier_s12.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s21 = self.ax_amp.plot_line_graph(self.s21_amp[:, 0], self.s21_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(RED))
-            self.amplifier_s21.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s22 = self.ax_amp.plot_line_graph(self.s22_amp[:, 0], self.s22_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(PURPLE))
-            self.amplifier_s22.add_updater(lambda mob: mob.move_to(self.ax_amp))
-
+            self.graph_group = VGroup(self.ax_amp, self.frequency_label, self.magnitude_label)
             return
 
         def stage():
@@ -160,8 +155,11 @@ class Amplifier(MovingCameraScene):
             self.frequency_label.next_to(self.ax_amp, UP).scale(1.1).set_color(WHITE)
             self.magnitude_label.next_to(self.ax_amp, LEFT).scale(1.1).set_color(WHITE)
             self.magnitude_label.rotate(PI / 2)
-
-            self.axes_group.shift(6.5 * RIGHT + 3 * UP)
+            self.graph_group.shift(6.5 * RIGHT + 3 * UP)
+            self.amplifier_s11.shift(6.5 * RIGHT + 3 * UP)
+            self.amplifier_s21.shift(6.5 * RIGHT + 3 * UP)
+            self.amplifier_s12.shift(6.5 * RIGHT + 3 * UP)
+            self.amplifier_s22.shift(6.5 * RIGHT + 3 * UP)
 
             self.circuit_amplifier.scale(0.6).set_z_index(-1)
             self.circuit_amplifier.shift(8 * LEFT + 4 * DOWN)
@@ -269,7 +267,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 0,
-                 "upto_animation_number": 120}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 10,
+                 "upto_animation_number": 10}):
     scene = Amplifier()
     scene.render()

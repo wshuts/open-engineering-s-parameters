@@ -107,10 +107,14 @@ class Amplifier(MovingCameraScene):
             self.s2p_matrix = Matrix([[r"\mathrm{S}_{11}", r"\mathrm{S}_{12}"],
                                       [r"\mathrm{S}_{21}", r"\mathrm{S}_{22}"]],
                                      left_bracket="(", right_bracket=")")
-            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0])
-            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1])
-            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2])
-            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3])
+            self.frame_box_s11 = SurroundingRectangle(self.s2p_matrix[0][0], buff=0.2)
+            self.frame_box_s11.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][0]))
+            self.frame_box_s12 = SurroundingRectangle(self.s2p_matrix[0][1], buff=0.2)
+            self.frame_box_s12.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][1]))
+            self.frame_box_s21 = SurroundingRectangle(self.s2p_matrix[0][2], buff=0.2)
+            self.frame_box_s21.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][2]))
+            self.frame_box_s22 = SurroundingRectangle(self.s2p_matrix[0][3], buff=0.2)
+            self.frame_box_s22.add_updater(lambda mob: mob.move_to(self.s2p_matrix[0][3]))
             self.grouped_equation = VGroup(self.cap_s, self.eq, self.s2p_matrix)
             self.s11_amp = read_spar(parameter="s11")
             self.s21_amp = read_spar(parameter="s21")
@@ -125,12 +129,16 @@ class Amplifier(MovingCameraScene):
 
             self.amplifier_s11 = self.ax_amp.plot_line_graph(self.s11_amp[:, 0], self.s11_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(BLUE))
+            self.amplifier_s11.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s12 = self.ax_amp.plot_line_graph(self.s12_amp[:, 0], self.s12_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(GREEN))
+            self.amplifier_s12.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s21 = self.ax_amp.plot_line_graph(self.s21_amp[:, 0], self.s21_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(RED))
+            self.amplifier_s21.add_updater(lambda mob: mob.move_to(self.ax_amp))
             self.amplifier_s22 = self.ax_amp.plot_line_graph(self.s22_amp[:, 0], self.s22_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(PURPLE))
+            self.amplifier_s22.add_updater(lambda mob: mob.move_to(self.ax_amp))
 
             return
 
@@ -261,7 +269,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 10,
-                 "upto_animation_number": 10}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 0,
+                 "upto_animation_number": 120}):
     scene = Amplifier()
     scene.render()

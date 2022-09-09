@@ -1,9 +1,9 @@
 from colour import Color
 from manim import *
 
-SHIFT_DOWN = 8
-SHIFT_LEFT = 2.2
-WIDTH = 26
+PAN_CAMERA_DOWN = 8
+PAN_CAMERA_LEFT = 2.2
+WIDTH = 35
 
 
 class Amplifier(MovingCameraScene):
@@ -47,10 +47,10 @@ class Amplifier(MovingCameraScene):
     def setup(self):
         MovingCameraScene.setup(self)
         self.frame.width = WIDTH
-        self.frame.move_to(SHIFT_LEFT * LEFT + SHIFT_DOWN * DOWN)
+        self.frame.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
         self.add(self.number_plane)
         self.number_plane.width = WIDTH
-        self.number_plane.move_to(SHIFT_LEFT * LEFT + SHIFT_DOWN * DOWN)
+        self.number_plane.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
 
     # noinspection PyTypeChecker
     def construct(self):
@@ -256,7 +256,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 8,
-                 "upto_animation_number": 8}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 7,
+                 "upto_animation_number": 7}):
     scene = Amplifier()
     scene.render()

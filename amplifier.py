@@ -53,7 +53,7 @@ class Amplifier(MovingCameraScene):
         MovingCameraScene.setup(self)
         self.frame.width = FRAME_WIDTH
         self.frame.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
-        self.add(self.number_plane)
+        # self.add(self.number_plane)
         self.number_plane.width = FRAME_WIDTH
         self.number_plane.move_to(PAN_CAMERA_LEFT * LEFT + PAN_CAMERA_DOWN * DOWN)
 
@@ -157,10 +157,10 @@ class Amplifier(MovingCameraScene):
             self.magnitude_label.next_to(self.ax_amp, LEFT).scale(1.1).set_color(WHITE)
             self.magnitude_label.rotate(PI / 2)
             self.graph_group.shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s11.shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s21.shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s12.shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s22.shift(GRAPH_SHIFT_VECTOR)
+            self.amplifier_s11.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
+            self.amplifier_s21.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
+            self.amplifier_s12.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
+            self.amplifier_s22.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
 
             self.circuit_amplifier.scale(0.6).set_z_index(-1)
             self.circuit_amplifier.shift(8 * LEFT + 4 * DOWN)
@@ -268,7 +268,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 10,
-                 "upto_animation_number": 10}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 0,
+                 "upto_animation_number": 120}):
     scene = Amplifier()
     scene.render()

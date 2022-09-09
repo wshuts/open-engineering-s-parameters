@@ -28,6 +28,7 @@ class Amplifier(MovingCameraScene):
         self.minus = None
         self.plus_v = None
         self.minus_v = None
+        self.circuit_group = None
         self.long_right_arrow = None
         self.n_squared = None
         self.cap_s = None
@@ -100,6 +101,11 @@ class Amplifier(MovingCameraScene):
             self.minus = MathTex("-")
             self.plus_v = MathTex("\mathrm{+V}")
             self.minus_v = MathTex("\mathrm{-V}")
+            self.circuit_group = VGroup(
+                self.port1_num, self.port2_num,
+                self.plus, self.minus,
+                self.plus_v, self.minus_v
+            )
             self.long_right_arrow = Tex('$\Longrightarrow$')
             self.n_squared = MathTex("n^2", "=", "4")
             self.cap_s = MathTex(r"\mathrm{S}")
@@ -186,6 +192,8 @@ class Amplifier(MovingCameraScene):
             self.minus_v.shift(DOWN * 14.1)
             self.minus_v.shift(LEFT * 11.04)
             self.minus_v.scale(0.85)
+
+            self.circuit_group.shift(0 * RIGHT + 0 * UP)
 
             self.long_right_arrow.scale(5).set_color(WHITE)
             self.long_right_arrow.shift(LEFT * 4 + DOWN * 12.5)

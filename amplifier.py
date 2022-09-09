@@ -182,7 +182,7 @@ class Amplifier(MovingCameraScene):
             self.minus_v.shift(8 * LEFT + 5.5 * DOWN)
 
             self.long_right_arrow.scale(5).set_color(WHITE)
-            self.long_right_arrow.shift(LEFT * 4 + DOWN * 12.5)
+            self.long_right_arrow.shift(0 * LEFT + 4 * DOWN)
 
             self.n_squared.next_to(self.long_right_arrow).scale(1.6).shift(LEFT * 3.25 + UP * 0.9)
             self.n_squared[0].set_color(YELLOW)

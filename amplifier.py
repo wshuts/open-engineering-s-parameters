@@ -76,13 +76,6 @@ class Amplifier(MovingCameraScene):
         def create():
             self.title = Text("Example Networks", color=YELLOW)
             self.underline = Line(LEFT, RIGHT, color=YELLOW)
-            self.networks = Tex("Antennas", "Dummy Loads", "Filters", "Attenuators", "Circulators", "Isolators",
-                                "Amplifiers")
-            for network in self.networks:
-                dot = MathTex("\\cdot")
-                dot.scale(3).next_to(network[0], LEFT * 0.4, buff=0.4)
-                network.add_to_back(dot)
-            self.title_group = VGroup(self.title, self.underline, self.networks)
             self.ax_amp = Axes(
                 x_range=[13, 18, 1],
                 y_range=[-40, 20, 10],
@@ -142,18 +135,25 @@ class Amplifier(MovingCameraScene):
             self.ax_amp.add(self.amplifier_s22)
             return
 
-        def stage():
-            self.title.scale(1.2)
-            self.title.to_edge(UP)
-
-            self.underline.width = 1.1 * self.title.width
-            self.underline.next_to(self.title, DOWN)
-
+        def create_bulleted_list():
+            self.networks = Tex("Antennas", "Dummy Loads", "Filters", "Attenuators", "Circulators", "Isolators",
+                                "Amplifiers")
+            for network in self.networks:
+                dot = MathTex("\\cdot")
+                dot.scale(3).next_to(network[0], LEFT * 0.4, buff=0.4)
+                network.add_to_back(dot)
             self.networks.arrange(DOWN, aligned_edge=LEFT, buff=0.3)
             self.networks.scale(1.45)
             self.networks.next_to(self.underline, DOWN)
             self.networks.set_opacity(0.5)
 
+        def stage():
+            self.title.scale(1.2)
+            self.title.to_edge(UP)
+            self.underline.width = 1.1 * self.title.width
+            self.underline.next_to(self.title, DOWN)
+            create_bulleted_list()
+            self.title_group = VGroup(self.title, self.underline, self.networks)
             self.title_group.shift(8 * LEFT + 3.6 * UP)
 
             self.ax_amp.scale(1.25)

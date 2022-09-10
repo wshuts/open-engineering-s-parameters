@@ -136,6 +136,10 @@ class Amplifier(MovingCameraScene):
                                                              add_vertex_dots=False, line_color=Color(RED))
             self.amplifier_s22 = self.ax_amp.plot_line_graph(self.s22_amp[:, 0], self.s22_amp[:, 1],
                                                              add_vertex_dots=False, line_color=Color(PURPLE))
+            self.ax_amp.add(self.amplifier_s11)
+            self.ax_amp.add(self.amplifier_s21)
+            self.ax_amp.add(self.amplifier_s12)
+            self.ax_amp.add(self.amplifier_s22)
             return
 
         def stage():
@@ -157,10 +161,6 @@ class Amplifier(MovingCameraScene):
             self.magnitude_label.next_to(self.ax_amp, LEFT).scale(1.1).set_color(WHITE)
             self.magnitude_label.rotate(PI / 2)
             self.graph_group.shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s11.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s21.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s12.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
-            self.amplifier_s22.scale(1.25).shift(GRAPH_SHIFT_VECTOR)
 
             self.circuit_amplifier.scale(0.6).set_z_index(-1)
             self.circuit_amplifier.shift(8 * LEFT + 4 * DOWN)
@@ -268,7 +268,7 @@ class Amplifier(MovingCameraScene):
         animate()
 
 
-with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 0,
-                 "upto_animation_number": 120}):
+with tempconfig({"quality": "high_quality", "preview": True, "disable_caching": False, "from_animation_number": 11,
+                 "upto_animation_number": 11}):
     scene = Amplifier()
     scene.render()
